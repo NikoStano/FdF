@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/02 16:20:39 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/02 16:31:33 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE)
 COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -f
 
-# SRCS		=	fdf.c
+SRCS		=	main.c
 
 OBJS		=	$(SRCS:%.c=%.o)
 
@@ -34,7 +34,7 @@ all:			$(NAME)
 
 $(NAME):		$(OBJS) $(LIBFT_A) $(PRINTF_A) $(GNL_A) $(MLX_A)		
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(PRINTF) -lprintf -L$(GNL) \
-	-lgnl -L$(MLX) -lmlx -lm -o $(NAME) -framework OpenGL -framework AppKit
+	-lgnl -L$(MLX) -lmlx -lXext -lX11 -lm -o $(NAME)
 	@echo "Linked into executable \033[0;32mfdf\033[0m."
 
 $(LIBFT_A):
