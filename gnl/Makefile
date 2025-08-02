@@ -6,18 +6,18 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 08:34:28 by nistanoj          #+#    #+#              #
-#    Updated: 2025/07/31 08:41:32 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/02 15:43:34 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libgnl.a
 
 CC			=	cc
-CFLAGS		=	-Wall-Wextra-Werror
+CFLAGS		=	-Wall -Wextra -Werror
 COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -f
 
-SRCS		=	get_next_line.c get_next_line_utils.c
+SRCS		=	get_next_line.c
 OBJS		=	$(SRCS:%.c=%.o)
 
 all:			$(NAME)

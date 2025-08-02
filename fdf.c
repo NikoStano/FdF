@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:02 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/07/31 10:57:24 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/02 15:39:05 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int  find_height(char *filename)
     if (fd == -1)
         return (write(1, "Open ERROR !\n", 13), 0);
     height = 0;
-    while (get_next_line(fd, &line) >= 0 && *line != '\0');
+    while (get_next_line(fd, &line) >= 0 && *line != '\0')
     {
         height++;
         free(line);
@@ -61,7 +61,7 @@ static int  find_width(char *filename)
     return (width);
 }
 
-static void fill_tab(int **n, char *line, int width)
+static void ft_fill_tab(int **n, char *line, int width)
 {
     char    **num;
     int     i;
@@ -73,7 +73,7 @@ static void fill_tab(int **n, char *line, int width)
     {
         n[i] = malloc(sizeof(int) * 2);
         if (!n[i])
-            return (write(1, "Malloc ERROR !\n", 15), 0);
+            return ;
         n[i][0] = ft_atoi(num[i]);
         j = 0;
         while (num[i][j] && num[i][j] != ',')
@@ -85,11 +85,11 @@ static void fill_tab(int **n, char *line, int width)
         free(num[i]);
     }
     if (i != width || num[i])
-        return (write(1, "Error : file has irregular width !\n", 35));
+        return ;
     free(num);
 }
 
-static void	find_z(t_map *map)
+static void	ft_get_z_min_max(t_map *map)
 {
 	int	i;
 	int	j;
@@ -118,25 +118,25 @@ void	ft_check_valid(char *filename, t_map *map)
 	char	*line;
 	int		i;
 
-	map->width = ft_get_width(filename);
-	map->height = ft_get_height(filename);
+	map->width = find_width(filename);
+	map->height = find_height(filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_return_error("open error", 1);
+		return ;
 	i = -1;
 	map->array = malloc(sizeof(int **) * map->height);
 	if (!map->array)
-		ft_return_error("malloc error", 1);
+		return ;
 	while (get_next_line(fd, &line) >= 0 && *line != '\0')
 	{
 		map->array[++i] = malloc(sizeof(int *) * map->width);
 		if (!map->array[i])
-			ft_return_error("malloc error", 1);
-		ft_fill_table(map->array[i], line, map->width);
+			return ;
+		ft_fill_tab(map->array[i], line, map->width);
 		free(line);
 	}
 	free(line);
 	ft_get_z_min_max(map);
 	if (close(fd) == -1)
-		ft_return_error("close error", 1);
+		return ;
 }

@@ -6,23 +6,21 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/07/31 09:47:44 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/02 14:44:52 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	FdF
 INCLUDE		=	includes
 LIBFT		=	libft/
-PRINTF		=	printf/
 GNL			=	gnl/
 MLX			=	minilibx/
 LIBFT_A		=	$(addprefix $(LIBFT), libft.a)
-PRINTF_A	=	$(addprefix $(PRINTF), libftprintf.a)
 GNL_A		=	$(addprefix $(GNL), libgnl.a)
 MLX_A		=	$(addprefix $(MLX), libmlx.a)
 
 CC			=	cc
-CFLAGS		=	-Wall-Werror-Wextra -I$(INCLUDE)
+CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE)
 COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -f
 
@@ -33,17 +31,13 @@ OBJS		=	$(SRCS:%.c=%.o)
 all:			$(NAME)
 
 $(NAME):		$(OBJS) $(LIBFT_A) $(PRINTF_A) $(GNL_A) $(MLX_A)		
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -L$(GNL) \
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(GNL) \
 	-lgnl -L$(MLX) -lmlx -lm -o $(NAME) -framework OpenGL -framework AppKit
 	@echo "Linked into executable \033[0;32mfdf\033[0m."
 
 $(LIBFT_A):
 	@$(MAKE) -s -C $(LIBFT)
 	@echo "Compiled $(LIBFT_A)."
-
-$(PRINTF_A):
-	@$(MAKE) -s -C $(PRINTF)
-	@echo "Compiled $(PRINTF_A)."
 
 $(GNL_A):
 	@$(MAKE) -s -C $(GNL)
