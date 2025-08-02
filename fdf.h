@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:37:58 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/07/31 10:57:46 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/02 16:17:54 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 # include <math.h>
 # include <errno.h>
 # include <fcntl.h>
-# include "libft.h"
-# include "get_next_line.h"
-# include "mlx.h"
+# include "./includes/libft.h"
+# include "./includes/get_next_line.h"
+# include "./includes/ft_printf.h"
+# include "./includes/mlx.h"
 
 typedef struct s_map
 {

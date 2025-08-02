@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/02 14:44:52 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/02 16:20:39 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@ NAME		=	FdF
 INCLUDE		=	includes
 LIBFT		=	libft/
 GNL			=	gnl/
+PRINTF		=	printf/
 MLX			=	minilibx/
 LIBFT_A		=	$(addprefix $(LIBFT), libft.a)
 GNL_A		=	$(addprefix $(GNL), libgnl.a)
+PRINTF_A	=	$(addprefix $(PRINTF), libprintf.a)
 MLX_A		=	$(addprefix $(MLX), libmlx.a)
 
 CC			=	cc
@@ -24,14 +26,14 @@ CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE)
 COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -f
 
-SRCS		=	fdf.c main.c
+# SRCS		=	fdf.c
 
 OBJS		=	$(SRCS:%.c=%.o)
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS) $(LIBFT_A) $(PRINTF_A) $(GNL_A) $(MLX_A)		
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(GNL) \
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(PRINTF) -lprintf -L$(GNL) \
 	-lgnl -L$(MLX) -lmlx -lm -o $(NAME) -framework OpenGL -framework AppKit
 	@echo "Linked into executable \033[0;32mfdf\033[0m."
 
@@ -42,6 +44,10 @@ $(LIBFT_A):
 $(GNL_A):
 	@$(MAKE) -s -C $(GNL)
 	@echo "Compiled $(GNL_A)."
+
+$(PRINTF_A):
+	@$(MAKE) -s -C $(PRINTF)
+	@echo "Compiled $(PRINTF_A_A)."
 
 $(MLX_A):
 	@$(MAKE) -s -C $(MLX)
@@ -62,6 +68,8 @@ clean:			localclean
 	@echo "Clean libft."
 	@$(MAKE) clean -s -C $(GNL)
 	@echo "Clean gnl."
+	@$(MAKE) clean -s -C $(PRINTF)
+	@echo "Clean printf."
 	@$(MAKE) clean -s -C $(MLX)
 	@echo "Clean mlx."
 
@@ -70,6 +78,8 @@ fclean:			clean
 	@echo "Full clean libft."
 	@$(MAKE) fclean -s -C $(GNL)
 	@echo "Full clean gnl."
+	@$(MAKE) fclean -s -C $(PRINTF)
+	@echo "Full clean printf."
 	@$(MAKE) clean -s -C $(MLX)
 	@echo "Clean mlx."
 	@$(RM) $(NAME)
