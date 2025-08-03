@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:35:20 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/02 14:55:17 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/03 15:04:36 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int	get_next_line(int fd, char **line);
+int	get_next_line(int fd,char **line);
 
 #endif
