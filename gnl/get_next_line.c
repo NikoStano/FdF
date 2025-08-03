@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:33:41 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/03 00:42:51 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/03 14:41:30 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*ft_malloc_size(char **line, char *buf)
 	int		buf_len;
 
 	line_len = 0;
-	while (*line && (*line)[line_len] && (*line)[line_len] != '\n')
+	while (*line && *line[line_len] && *line[line_len] != '\n')
 		line_len++;
 	buf_len = 0;
 	while (buf[buf_len] && buf[buf_len] != '\n')
@@ -41,8 +41,8 @@ static int	ft_add_to_line(char **line, char *buf)
 		return (-1);
 	i = 0;
 	j = 0;
-	while (*line && (*line)[i] && (*line)[i] != '\n')
-		tmp[i++] = (*line)[j++];
+	while (*line && *line[i] && *line[i] != '\n')
+		tmp[i++] = *line[j++];
 	j = 0;
 	while (buf[j] && buf[j] != '\n')
 		tmp[i++] = buf[j++];
@@ -54,7 +54,7 @@ static int	ft_add_to_line(char **line, char *buf)
 		buf[i++] = buf[++j];
 	buf[i] = '\0';
 	i = 0;
-	while ((*line)[i] && (*line)[i] != '\n')
+	while (*line[i] && *line[i] != '\n')
 		i++;
 	return (i);
 }
@@ -66,7 +66,7 @@ static int	ft_get_next_line(int fd, char **line)
 
 	*line = NULL;
 	ret = ft_add_to_line(line, buf[fd]);
-	while (ret != -1 && (*line)[ret] != '\n')
+	while (ret != -1 && *line[ret] != '\n')
 	{
 		ret = read(fd, buf[fd], BUFFER_SIZE);
 		if (ret < 1)

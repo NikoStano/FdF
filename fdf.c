@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:02 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/03 14:35:46 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/03 14:37:24 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,15 @@ void	ft_check_valid(char *filename, char *buff)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return ;
-	i = -1;
+	i = 0;
 	while (get_next_line(fd, &line) >= 0 && *line != '\0')
 	{
-		buff[i++] = malloc(sizeof(int *) * line[i++]);
+		buff[i] = malloc(sizeof(int *) * line[i]);
 		if (!line[i])
 			return ;
 		ft_fill_tab(buff[i], line, filename[i]);
 		free(line);
+        i++;
 	}
 	free(line);
 	if (close(fd) == -1)
