@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:33:41 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/07/31 10:11:28 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/03 00:42:51 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	ft_get_next_line(int fd, char **line)
 	}
 	if (ret == -1)
 		return (-1);
-	(*line)[ret] = '\0';
+	*line[ret] = '\0';
 	return (1);
 }
 

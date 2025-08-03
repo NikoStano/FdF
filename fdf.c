@@ -6,13 +6,13 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:02 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/02 15:39:05 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/03 14:35:46 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int  find_height(char *filename)
+int find_height(char *filename)
 {
     int     fd;
     int     height;
@@ -34,7 +34,7 @@ static int  find_height(char *filename)
 
 }
 
-static int  find_width(char *filename)
+int find_width(char *filename)
 {
     int     fd;
     int     width;
@@ -61,7 +61,7 @@ static int  find_width(char *filename)
     return (width);
 }
 
-static void ft_fill_tab(int **n, char *line, int width)
+void    ft_fill_tab(int **n, char *line, int width)
 {
     char    **num;
     int     i;
@@ -89,54 +89,25 @@ static void ft_fill_tab(int **n, char *line, int width)
     free(num);
 }
 
-static void	ft_get_z_min_max(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	map->z_min = map->array[0][0][0];
-	map->z_max = map->array[0][0][0];
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->array[i][j][0] < map->z_min)
-				map->z_min = map->array[i][j][0];
-			if (map->array[i][j][0] > map->z_max)
-				map->z_max = map->array[i][j][0];
-			j++;
-		}
-		i++;
-	}
-}
-
-void	ft_check_valid(char *filename, t_map *map)
+void	ft_check_valid(char *filename, char *buff)
 {
 	int		fd;
 	char	*line;
 	int		i;
 
-	map->width = find_width(filename);
-	map->height = find_height(filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return ;
 	i = -1;
-	map->array = malloc(sizeof(int **) * map->height);
-	if (!map->array)
-		return ;
 	while (get_next_line(fd, &line) >= 0 && *line != '\0')
 	{
-		map->array[++i] = malloc(sizeof(int *) * map->width);
-		if (!map->array[i])
+		buff[i++] = malloc(sizeof(int *) * line[i++]);
+		if (!line[i])
 			return ;
-		ft_fill_tab(map->array[i], line, map->width);
+		ft_fill_tab(buff[i], line, filename[i]);
 		free(line);
 	}
 	free(line);
-	ft_get_z_min_max(map);
 	if (close(fd) == -1)
 		return ;
 }

@@ -6,11 +6,12 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/02 16:31:33 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/03 02:31:48 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	FdF
+
 INCLUDE		=	includes
 LIBFT		=	libft/
 GNL			=	gnl/
@@ -27,30 +28,29 @@ COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -f
 
 SRCS		=	main.c
-
 OBJS		=	$(SRCS:%.c=%.o)
 
 all:			$(NAME)
 
-$(NAME):		$(OBJS) $(LIBFT_A) $(PRINTF_A) $(GNL_A) $(MLX_A)		
+$(NAME):		$(OBJS) $(LIBFT_A) $(GNL_A) $(PRINTF_A) $(MLX_A)		
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(PRINTF) -lprintf -L$(GNL) \
 	-lgnl -L$(MLX) -lmlx -lXext -lX11 -lm -o $(NAME)
 	@echo "Linked into executable \033[0;32mfdf\033[0m."
 
 $(LIBFT_A):
-	@$(MAKE) -s -C $(LIBFT)
+	@make -s -C $(LIBFT)
 	@echo "Compiled $(LIBFT_A)."
 
 $(GNL_A):
-	@$(MAKE) -s -C $(GNL)
+	@make -s -C $(GNL)
 	@echo "Compiled $(GNL_A)."
 
 $(PRINTF_A):
-	@$(MAKE) -s -C $(PRINTF)
+	@make -s -C $(PRINTF)
 	@echo "Compiled $(PRINTF_A_A)."
 
 $(MLX_A):
-	@$(MAKE) -s -C $(MLX)
+	@make -s -C $(MLX)
 	@echo "Compiled $(MLX_A)."
 
 bonus:			all
@@ -64,23 +64,23 @@ localclean:
 	@echo "Removed object files."
 
 clean:			localclean
-	@$(MAKE) clean -s -C $(LIBFT)
+	@make clean -s -C $(LIBFT)
 	@echo "Clean libft."
-	@$(MAKE) clean -s -C $(GNL)
+	@make clean -s -C $(GNL)
 	@echo "Clean gnl."
-	@$(MAKE) clean -s -C $(PRINTF)
+	@make clean -s -C $(PRINTF)
 	@echo "Clean printf."
-	@$(MAKE) clean -s -C $(MLX)
+	@make clean -s -C $(MLX)
 	@echo "Clean mlx."
 
 fclean:			clean
-	@$(MAKE) fclean -s -C $(LIBFT)
+	@make fclean -s -C $(LIBFT)
 	@echo "Full clean libft."
-	@$(MAKE) fclean -s -C $(GNL)
+	@make fclean -s -C $(GNL)
 	@echo "Full clean gnl."
-	@$(MAKE) fclean -s -C $(PRINTF)
+	@make fclean -s -C $(PRINTF)
 	@echo "Full clean printf."
-	@$(MAKE) clean -s -C $(MLX)
+	@make clean -s -C $(MLX)
 	@echo "Clean mlx."
 	@$(RM) $(NAME)
 	@echo "Removed executable."
