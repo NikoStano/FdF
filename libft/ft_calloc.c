@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:13:05 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/28 23:38:53 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:05:12 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:06:46 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/02 15:29:55 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:05:01 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 static int	value_in_base(const char c, const char *base)
 {

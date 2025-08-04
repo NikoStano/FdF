@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/13 17:33:41 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/04 17:18:11 by nistanoj         ###   ########.fr       */
+/*   Created: 2025/04/05 18:05:14 by nistanoj          #+#    #+#             */
+/*   Updated: 2025/05/19 07:26:17 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_line(int fd, char *buffer)
 {
@@ -18,15 +18,15 @@ static char	*read_line(int fd, char *buffer)
 	ssize_t	rd;
 
 	rd = 1;
-	while (rd > 0 && !ft_strchr_gnl(buffer, '\n'))
+	while (rd > 0 && !ft_strchr(buffer, '\n'))
 	{
 		rd = read(fd, file, BUFFER_SIZE);
 		if (rd == -1)
 			return (free(buffer), NULL);
 		file[rd] = '\0';
-		buffer = ft_strjoin_gnl(buffer, file);
+		buffer = ft_strjoin(buffer, file);
 		if (!buffer)
-			buffer = ft_strdup_gnl("");
+			buffer = ft_strdup("");
 	}
 	return (buffer);
 }
@@ -43,14 +43,14 @@ static char	*find_line(char *buffer)
 		i++;
 	if (buffer[i] == '\n')
 		i++;
-	line = ft_substr_gnl(buffer, 0, i);
+	line = ft_substr(buffer, 0, i);
 	return (line);
 }
 
 static char	*next_line(char *buffer)
 {
 	char	*next;
-	size_t	i;
+	int		i;
 
 	if (!buffer)
 		return (NULL);
@@ -61,23 +61,23 @@ static char	*next_line(char *buffer)
 		i++;
 	if (buffer[i] == '\0')
 		return (free(buffer), NULL);
-	next = ft_substr_gnl(buffer, i, ft_strlen_gnl(buffer) - i);
+	next = ft_substr(buffer, i, ft_strlen(buffer) - i);
 	return (free(buffer), next);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[1024];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
-	buffer = read_line(fd, buffer);
-	if (!buffer)
+	buffer[fd] = read_line(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = find_line(buffer);
+	line = find_line(buffer[fd]);
 	if (!line)
-		return (free(buffer), buffer = NULL, NULL);
-	buffer = next_line(buffer);
+		return (free(buffer[fd]), buffer[fd] = NULL, NULL);
+	buffer[fd] = next_line(buffer[fd]);
 	return (line);
 }

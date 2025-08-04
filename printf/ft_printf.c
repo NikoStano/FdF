@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:29:01 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/05/17 15:49:05 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:10:48 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 static int	ft_find_format(const char c, va_list args)
 {

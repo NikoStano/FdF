@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:27:16 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/28 17:29:01 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:10:55 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	ft_putnbr(int n)
 {

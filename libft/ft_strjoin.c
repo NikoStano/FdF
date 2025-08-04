@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:17:10 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/28 23:38:58 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:07:23 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {

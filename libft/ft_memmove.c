@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:15:13 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/30 15:26:24 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:06:48 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {

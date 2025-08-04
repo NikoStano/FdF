@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:13:38 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/27 16:13:39 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:05:36 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 int	ft_isdigit(int c)
 {

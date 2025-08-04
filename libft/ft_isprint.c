@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:13:47 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/27 16:13:48 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:05:40 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 int	ft_isprint(int c)
 {

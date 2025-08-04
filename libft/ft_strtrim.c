@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:18:01 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/28 23:42:46 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:07:52 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 static unsigned int	inset(const char *set, char c)
 {

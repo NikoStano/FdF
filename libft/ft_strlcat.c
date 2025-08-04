@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:17:16 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/27 16:17:17 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:07:27 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

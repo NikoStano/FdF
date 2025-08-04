@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 19:18:10 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/05/17 05:40:47 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:10:58 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 int	ft_putstr(char *s)
 {

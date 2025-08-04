@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:14:06 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/27 16:14:07 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:06:15 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

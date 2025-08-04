@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 02:54:24 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/03 03:20:47 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:05:16 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 size_t	ft_count_words(char *str)
 {

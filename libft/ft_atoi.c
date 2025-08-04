@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:12:17 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/04/27 16:12:21 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:05:05 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 int	ft_atoi(const char *nptr)
 {
