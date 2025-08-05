@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:37:58 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/05 19:11:58 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/05 18:41:32 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@
 # include "ft_printf.h"
 # include "mlx.h"
 
-typedef struct s_env
-{
+typedef struct s_env {
 	void	*mlx;
 	void	*win;
 	int		**buff;
@@ -43,23 +42,13 @@ typedef struct s_env
 	int		last_y;
 }			t_env;
 
-
-/*PARSE_C*/
-int		read_map(char *filename, int **buff, int *cols);
-void	ft_fill_tab(int *tab, char *line, int width);
-
-/*UTILS_C*/
-int		count_lines(char *filename);
-char	*ft_strtoq(char *str, const char *delim);
-
-/*DRAW_MAP_C*/
-void	draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1);
 void	draw_map(t_env *env);
-
-/*KEY_C*/
 int		handle_key(int keycode, t_env *env);
-int		mouse_press(int button, int x, int y, t_env *env);
-int		mouse_release(int button, int x, int y, t_env *env);
-int		mouse_move(int x, int y, t_env *env);
+
+int		ft_check_valid(char *filename, int **buff, int *rows, int *cols);
+char	*ft_strtoq(char *str, const char *delim);
+void	ft_fill_tab(int *tab, char *line, int width);
+// void	draw_map(void *mlx, void *win, int **buff, int rows, int cols);
+void	draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1);
 
 #endif

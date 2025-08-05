@@ -6,36 +6,36 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 16:57:36 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/05 02:43:56 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/05 19:03:27 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	main(int argc, char **argv)
-{
-	int		**buff;
-	void	*mlx;
-	void	*win;
-	int		rows;
-	int		cols;
-	int		i;
+// int	main(int argc, char **argv)
+// {
+// 	int		**buff;
+// 	void	*mlx;
+// 	void	*win;
+// 	int		rows;
+// 	int		cols;
+// 	int		i;
 
-	if (argc != 2)
-		return (ft_printf("Usage: %s <filename>\n", argv[0]), 1);
-	buff = malloc(sizeof(int *) * 100);
-	if (!buff)
-		return (perror("malloc failed"), 1);
-	ft_check_valid(argv[1], buff, &rows, &cols);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, WIDTH, HEIGHT, "FdF simple");
-	draw_map(mlx, win, buff, rows, cols);
-	mlx_loop(mlx);
-	for (i = 0; i < rows; i++)
-		free(buff[i]);
-	free(buff);
-	return (0);
-}
+// 	if (argc != 2)
+// 		return (ft_printf("Usage: %s <filename>\n", argv[0]), 1);
+// 	buff = malloc(sizeof(int *) * 100);
+// 	if (!buff)
+// 		return (perror("malloc failed"), 1);
+// 	ft_check_valid(argv[1], buff, &rows, &cols);
+// 	mlx = mlx_init();
+// 	win = mlx_new_window(mlx, WIDTH, HEIGHT, "FdF simple");
+// 	draw_map(mlx, win, buff, rows, cols);
+// 	mlx_loop(mlx);
+// 	for (i = 0; i < rows; i++)
+// 		free(buff[i]);
+// 	free(buff);
+// 	return (0);
+// }
 
 
 // #include "fdf.h"

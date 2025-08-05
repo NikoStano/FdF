@@ -6,104 +6,62 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:02 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/05 02:43:42 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/05 19:03:32 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	ft_check_valid(char *filename, int **buff, int *rows, int *cols)
+int	main(int argc, char **argv)
 {
-	int		fd;
-	char	*line;
+	t_env	env;
+	int		line;
 	int		i;
-	int		width;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	if (argc != 2)
+		return (ft_printf("Usage: %s <filename>\n", argv[0]), 1);
+	line = count_lines(argv[1]);
+	if (line <= 0)
+		return (ft_printf("Error: Invalid file or empty file.\n"), 1);
+	env.buff = malloc(sizeof(int *) * line);
+	if (!env.buff)
+		return (ft_printf("Error: Memory allocation failed.\n"), 1);
+	if (read_map(argv[1], env.buff, &env.cols) != 0)
 	{
-		width = ft_count_words(line);
-		if (i == 0)
-			*cols = width;
-		buff[i] = malloc(sizeof(int) * width);
-		if (!buff[i])
-		{
-			free(line);
-			while (i-- > 0)
-				free(buff[i]);
-			close(fd);
-			return (-1);
-		}
-		ft_fill_tab(buff[i], line, width);
-		free(line);
-		i++;
+		free(env.buff);
+		return (ft_printf("Error: Could not read map.\n"), 1);
 	}
-	close(fd);
-	*rows = i;
+	env.rows = line;
+	env.offset_x = WIDTH / 2;
+	env.offset_y = HEIGHT / 2;
+	env.mlx = mlx_init();
+	if (!env.mlx)
+	{
+		free(env.buff);
+		return (ft_printf("Error: Could not initialize mlx.\n"), 1);
+	}
+	env.win = mlx_new_window(env.mlx, WIDTH, HEIGHT, "FdF");
+	if (!env.win)
+	{
+		free(env.buff);
+		return (ft_printf("Error: Could not create window.\n"), 1);
+	}
+	draw_map(&env);
+	mlx_key_hook(env.win, handle_key, &env);
+
+	env.mouse_pressed = 0;
+	env.last_x = 0;
+	env.last_y = 0;
+	mlx_hook(env.win, 4, 1L<<2, mouse_press, &env);     // bouton press
+	mlx_hook(env.win, 6, 1L<<6, mouse_move, &env);      // mouvement
+	mlx_hook(env.win, 5, 1L<<3, mouse_release, &env);   // bouton release
+
+	mlx_loop(env.mlx);
+	i = -1;
+	while (i++ < env.rows - 1)
+		free(env.buff[i]);
+	free(env.buff);
+	mlx_destroy_window(env.mlx, env.win);
+	free(env.mlx);
 	return (0);
 }
-
-char	*ft_strtoq(char *str, const char *delim)
-{
-	static char	*next_token = NULL;
-	char		*token;
-
-	if (str)
-		next_token = str;
-	if (!next_token)
-		return (0);
-	token = next_token;
-	while (*next_token && !ft_strchr(delim, *next_token))
-		next_token++;
-	if (*next_token)
-	{
-		*next_token = '\0';
-		next_token++;
-	}
-	else
-		next_token = NULL;
-	return (token);
-}
-
-void	ft_fill_tab(int *tab, char *line, int width)
-{
-	int		i = 0;
-	char	*token;
-	
-	token = ft_strtoq(line, " ");
-	while (i < width && token)
-	{
-		tab[i] = ft_atoi(token);
-		i++;
-		token = ft_strtoq(NULL, " ");
-	}
-}
-
-// int main(int argc, char **argv)
-// {
-// 	int		**buff;
-
-// 	if (argc != 2)
-// 	{
-// 		ft_printf("Usage: %s <filename>\n", argv[0]);
-// 		return (EXIT_FAILURE);
-// 	}
-// 	buff = malloc(sizeof(int *) * 100); // Allocate memory for 100 lines
-// 	if (!buff)
-// 	{
-// 		perror("Memory allocation failed");
-// 		return (EXIT_FAILURE);
-// 	}
-// 	ft_check_valid(argv[1], buff);
-// 	// Free each allocated line
-// 	for (int i = 0; i < 100; i++)
-// 	{
-// 		if (buff[i])
-// 			free(buff[i]);
-// 	}
-// 	free(buff);
-// 	return (EXIT_SUCCESS);
-// }

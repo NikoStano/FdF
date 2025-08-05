@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/05 03:00:59 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/05 19:13:50 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,11 @@ RM			=	rm -f
 
 SRCS_DIR	=	srcs/
 SRCS		=	$(SRCS_DIR)fdf.c \
-				$(SRCS_DIR)main.c \
+				$(SRCS_DIR)fdf_utils.c \
  				$(SRCS_DIR)draw_map.c \
-# 				init.c \
-# 				key_hook.c \
-# 				mouse_hook.c \
-# 				error.c
+				$(SRCS_DIR)parse.c \
+				$(SRCS_DIR)key.c \
+
 OBJS		=	$(SRCS:%.c=%.o)
 
 all:			$(NAME)

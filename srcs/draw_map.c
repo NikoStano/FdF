@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 23:56:49 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/05 02:44:01 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/05 19:00:57 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,43 +39,39 @@ void	draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1)
 	}
 }
 
-void	draw_map(void *mlx, void *win, int **buff, int rows, int cols)
+void	draw_map(t_env *env)
 {
-	int	scale = 20;
-	int	z_scale = 2;
-	int	offset_x = 500;
-	int	offset_y = 300;
-	int y;
-	int x;
+	int scale = SCALE;
+	int z_scale = Z_SCALE;
+	int offset_x = env->offset_x;
+	int offset_y = env->offset_y;
+	int y, x;
 
 	y = 0;
-	while (y < rows)
+	while (y < env->rows)
 	{
 		x = 0;
-		while (x < cols)
+		while (x < env->cols)
 		{
-			int z = buff[y][x];
+			int z = env->buff[y][x];
 			int x0 = (x - y) * scale + offset_x;
 			int y0 = (x + y) * scale / 2 - z * z_scale + offset_y;
-			if (x < cols - 1)
+			if (x < env->cols - 1)
 			{
-				int z_right = buff[y][x + 1];
+				int z_right = env->buff[y][x + 1];
 				int x1 = ((x + 1) - y) * scale + offset_x;
-				int y1 = ((x + 1) + y) * scale / 2 - z_right * z_scale\
-				+ offset_y;
-				draw_line(mlx, win, x0, y0, x1, y1);
+				int y1 = ((x + 1) + y) * scale / 2 - z_right * z_scale + offset_y;
+				draw_line(env->mlx, env->win, x0, y0, x1, y1);
 			}
-			if (y < rows - 1)
+			if (y < env->rows - 1)
 			{
-				int z_down = buff[y + 1][x];
+				int z_down = env->buff[y + 1][x];
 				int x1 = (x - (y + 1)) * scale + offset_x;
-				int y1 = (x + (y + 1)) * scale / 2 - z_down * z_scale\
-				+ offset_y;
-				draw_line(mlx, win, x0, y0, x1, y1);
+				int y1 = (x + (y + 1)) * scale / 2 - z_down * z_scale + offset_y;
+				draw_line(env->mlx, env->win, x0, y0, x1, y1);
 			}
 			x++;
 		}
 		y++;
-		// cols = WIDTH / scale;
 	}
 }
