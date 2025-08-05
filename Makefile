@@ -6,17 +6,18 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/03 02:31:48 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/05 03:00:59 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	FdF
 
 INCLUDE		=	includes
-LIBFT		=	libft/
-GNL			=	gnl/
-PRINTF		=	printf/
-MLX			=	minilibx/
+
+LIBFT		=	lib/libft/
+GNL			=	lib/gnl/
+PRINTF		=	lib/printf/
+MLX			=	lib/minilibx/
 LIBFT_A		=	$(addprefix $(LIBFT), libft.a)
 GNL_A		=	$(addprefix $(GNL), libgnl.a)
 PRINTF_A	=	$(addprefix $(PRINTF), libprintf.a)
@@ -27,7 +28,14 @@ CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE)
 COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -f
 
-SRCS		=	main.c
+SRCS_DIR	=	srcs/
+SRCS		=	$(SRCS_DIR)fdf.c \
+				$(SRCS_DIR)main.c \
+ 				$(SRCS_DIR)draw_map.c \
+# 				init.c \
+# 				key_hook.c \
+# 				mouse_hook.c \
+# 				error.c
 OBJS		=	$(SRCS:%.c=%.o)
 
 all:			$(NAME)
