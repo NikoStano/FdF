@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:37:58 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/12 15:26:40 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:55:50 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,21 @@ typedef struct s_fdf
 
 
 // temp
-void draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1);
-void draw_map_ctx(t_fdf *fdf);
-int on_key(int keycode, t_fdf *fdf);
-int on_mouse(int button, int x, int y, t_fdf *fdf);
-int on_mouse_release(int button, int x, int y, t_fdf *fdf);
-int on_motion(int x, int y, t_fdf *fdf);
-int on_destroy(t_fdf *fdf);
-t_point **alloc_points_grid(int rows, int cols);
-void free_points_grid(t_point **grid, int rows);
-void fill_points_from_buff(t_point **pts, int **buff, int rows, int cols);
-int	ft_abs(int n);
-int	check_pos_point(int x0, int x1);
+void	draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1);
+void	draw_map_ctx(t_fdf *fdf);
+int		on_key(int keycode, t_fdf *fdf);
+int		on_mouse(int button, int x, int y, t_fdf *fdf);
+int		on_mouse_release(int button, int x, int y, t_fdf *fdf);
+int		on_motion(int x, int y, t_fdf *fdf);
+int		on_destroy(t_fdf *fdf);
+t_point	**alloc_points_grid(int rows, int cols);
+void	free_points_grid(t_point **grid, int rows);
+void	fill_points_from_buff(t_point **pts, int **buff, int rows, int cols);
+int		ft_abs(int n);
+int		check_pos_point(int x0, int x1);
 void	view_reset(t_view *v);
 void	apply_zoom(t_fdf *fdf, double factor, int pivot_x, int pivot_y);
+void	find_it(int y0, int x0, int y1, int x1, int dx, int dy);
 
 /* PARSE.C */
 
