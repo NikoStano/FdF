@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 23:56:49 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/12 11:31:06 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:35:04 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1)
 	sy = check_pos_point(y0, y1);
 	err = dx + dy;
 	while (x0 >= 0 && y0 >= 0 && x0 < WIDTH && y0 < HEIGHT)
+	// while (1)
 	{
 		mlx_pixel_put(mlx, win, x0, y0, 0xFFFFFF);
 		if (x0 == x1 && y0 == y1)
@@ -45,7 +46,7 @@ void	draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1)
 	}
 }
 
-static void draw_map_internal(t_fdf *fdf, int offx, int offy)
+static void draw_map_internal(t_fdf *fdf, int offx, int offy, int sc, int zsc)
 {
 	int y;
 	int x;
@@ -68,20 +69,20 @@ static void draw_map_internal(t_fdf *fdf, int offx, int offy)
 		while (x < cols)
 		{
 			z = fdf->buff[y][x];
-			x0 = (x - y) * SCALE + offx;
-			y0 = (x + y) * SCALE / 2 - z * Z_SCALE + offy;
+			x0 = (x - y) * sc + offx;
+			y0 = (x + y) * sc / 2 - z * zsc + offy;
 			if (x < cols - 1)
 			{
 				z_right = fdf->buff[y][x + 1];
-				x1 = ((x + 1) - y) * SCALE + offx;
-				y1 = ((x + 1) + y) * SCALE / 2 - z_right * Z_SCALE + offy;
+				x1 = ((x + 1) - y) * sc + offx;
+				y1 = ((x + 1) + y) * sc / 2 - z_right * zsc + offy;
 				draw_line(fdf->mlx, fdf->win, x0, y0, x1, y1);
 			}
 			if (y < rows - 1)
 			{
 				z_down = fdf->buff[y + 1][x];
-				x1 = (x - (y + 1)) * SCALE + offx;
-				y1 = (x + (y + 1)) * SCALE / 2 - z_down * Z_SCALE + offy;
+				x1 = (x - (y + 1)) * sc + offx;
+				y1 = (x + (y + 1)) * sc / 2 - z_down * zsc + offy;
 				draw_line(fdf->mlx, fdf->win, x0, y0, x1, y1);
 			}
 			x++;
@@ -90,9 +91,8 @@ static void draw_map_internal(t_fdf *fdf, int offx, int offy)
 	}
 }
 
-void draw_map_ctx(t_fdf *fdf)
+void	draw_map_ctx(t_fdf *fdf)
 {
-	// Efface et redessine en utilisant les offsets de la vue
 	mlx_clear_window(fdf->mlx, fdf->win);
-	draw_map_internal(fdf, fdf->view->offset_x, fdf->view->offset_y);
+	draw_map_internal(fdf, fdf->view->offset_x, fdf->view->offset_y, fdf->view->scale, fdf->view->z_scale);
 }

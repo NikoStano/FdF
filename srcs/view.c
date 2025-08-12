@@ -6,13 +6,13 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 11:34:32 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/12 11:35:12 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:58:02 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void view_reset(t_view *v)
+void	view_reset(t_view *v)
 {
     v->offset_x = OFFSET_X;
     v->offset_y = OFFSET_Y;
@@ -20,7 +20,7 @@ void view_reset(t_view *v)
     v->z_scale = Z_SCALE;
 }
 
-static int clampi(int val, int lo, int hi)
+static int	clampi(int val, int lo, int hi)
 {
     if (val < lo)
 		return lo;
@@ -29,10 +29,13 @@ static int clampi(int val, int lo, int hi)
     return val;
 }
 
-void apply_zoom(t_fdf *fdf, double factor, int pivot_x, int pivot_y)
+void	apply_zoom(t_fdf *fdf, double factor, int pivot_x, int pivot_y)
 {
-    int old_scale = fdf->view->scale;
-    int new_scale = clampi((int)round(old_scale * factor), MIN_SCALE, MAX_SCALE);
+    int old_scale;
+    int new_scale;
+
+	old_scale = fdf->view->scale;
+	new_scale = clampi((int)round(old_scale * factor), MIN_SCALE, MAX_SCALE); 
     if (new_scale == old_scale)
         return;
     double k = (double)new_scale / (double)old_scale;

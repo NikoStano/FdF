@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/12 10:56:12 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/12 15:18:49 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS		=	$(SRCS_DIR)fdf.c \
 				$(SRCS_DIR)parse.c \
 				$(SRCS_DIR)hook_check.c \
 				$(SRCS_DIR)points.c \
+				$(SRCS_DIR)view.c
 
 OBJS		=	$(SRCS:%.c=%.o)
 
