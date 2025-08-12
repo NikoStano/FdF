@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:33:41 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/05 02:45:25 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/08 15:25:47 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,20 @@ static char	*next_line(char *buffer)
 	return (free(buffer), next);
 }
 
-char	*get_next_line(int fd)
+int	get_next_line(int fd, char **line)
 {
 	static char	*buffer;
-	char		*line;
+	char		*tmp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (-1);
 	buffer = read_line(fd, buffer);
 	if (!buffer)
-		return (NULL);
-	line = find_line(buffer);
-	if (!line)
-		return (free(buffer), buffer = NULL, NULL);
+		return (0);
+	tmp = find_line(buffer);
+	if (!tmp)
+		return (free(buffer), buffer = NULL, -1);
+	*line = tmp;
 	buffer = next_line(buffer);
-	return (line);
+	return (1);
 }

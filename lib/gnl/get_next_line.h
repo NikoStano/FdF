@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:35:20 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/04 23:35:55 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/08 15:26:10 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd);
+int		get_next_line(int fd, char **line);
 size_t	ft_strlen_gnl(char *s);
 char	*ft_strchr_gnl(char *s, int c);
 char	*ft_substr_gnl(char *s, unsigned int start, size_t len);

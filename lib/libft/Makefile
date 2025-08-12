@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/26 16:35:06 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/03 03:35:05 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/11 23:03:20 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRCS			=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 					ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_atoi_base.c \
 					ft_lstsize_bonus.c ft_lstlast_bonus.c ft_count_words.c \
 					ft_lstadd_back_bonus.c ft_lstdelone_bonus.c	\
-					ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+					ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c \
+					ft_strtok.c
 OBJ				=	$(SRCS:%.c=%.o)
 
 all			:	$(NAME)

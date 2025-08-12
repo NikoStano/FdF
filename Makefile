@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/05 19:13:50 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/12 10:56:12 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,13 @@ COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -f
 
 SRCS_DIR	=	srcs/
+# SRCS		=	test.c
 SRCS		=	$(SRCS_DIR)fdf.c \
 				$(SRCS_DIR)fdf_utils.c \
  				$(SRCS_DIR)draw_map.c \
 				$(SRCS_DIR)parse.c \
-				$(SRCS_DIR)key.c \
+				$(SRCS_DIR)hook_check.c \
+				$(SRCS_DIR)points.c \
 
 OBJS		=	$(SRCS:%.c=%.o)
 
@@ -87,8 +89,6 @@ fclean:			clean
 	@echo "Full clean gnl."
 	@make fclean -s -C $(PRINTF)
 	@echo "Full clean printf."
-	@make clean -s -C $(MLX)
-	@echo "Clean mlx."
 	@$(RM) $(NAME)
 	@echo "Removed executable."
 
