@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:18:27 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/08 18:30:05 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/13 12:24:54 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),\
 /*Fonction additionnel*/
 
 unsigned int	ft_atoi_base(const char *str, const char *base);
-size_t			ft_count_words(char *str);
-char			*ft_strtok(char *str, const char *delim);
+// size_t			ft_count_words(char *str);
+// char			*ft_strtok(char *str, const char *delim);
 
 #endif
