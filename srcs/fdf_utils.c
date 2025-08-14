@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:55:05 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/13 12:43:30 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/14 19:39:01 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,24 @@ int	ft_count_words(char *str)
 	return (count);
 }
 
-char *ft_strtok(char *str, const char *delim)
+char	*ft_strtok(char *str, const char *delim)
 {
-    static char *next_token = NULL;
-    char        *token;
+	static char	*next_token = NULL;
+	char		*token;
 
-    if (str)
-        next_token = str;
-    if (!next_token)
-        return (0);
-    token = next_token;
-    while (*next_token && !ft_strchr(delim, *next_token))
-        next_token++;
-    if (*next_token)
-    {
-        *next_token = '\0';
-        next_token++;
-    }
-    else
-        next_token = NULL;
-    return (token);
+	if (str)
+		next_token = str;
+	if (!next_token)
+		return (0);
+	token = next_token;
+	while (*next_token && !ft_strchr(delim, *next_token))
+		next_token++;
+	if (*next_token)
+	{
+		*next_token = '\0';
+		next_token++;
+	}
+	else
+		next_token = NULL;
+	return (token);
 }

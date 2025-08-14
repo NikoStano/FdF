@@ -6,73 +6,51 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:58:48 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/13 12:43:02 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/14 18:56:20 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int ft_check_valid(char *filename, int **buff, int *rows, int *cols)
+int	ft_check_valid(char *filename, int **buff, int *rows, int *cols)
 {
-    int     fd;
-    char    *line;
-    int     i;
-    int     width;
+	t_valid	v;
+	int		i;
 
-    fd = open(filename, O_RDONLY);
-    if (fd == -1)
-        return (-1);
-    i = 0;
-    while (get_next_line(fd, &line) > 0 && line)
+	v.fd = open(filename, O_RDONLY);
+	if (v.fd == -1)
+		return (-1);
+	i = 0;
+	while (get_next_line(v.fd, &(v.line)) > 0 && v.line)
 	{
 		if (i == 0)
 		{
-			width = ft_count_words(line);
-			*cols = width;
+			v.width = ft_count_words(v.line);
+			*cols = v.width;
 		}
-		else if (ft_count_words(line) != width)
-		{
-			free(line);
-			close(fd);
-			return (-1); // lignes de longueurs différentes
-		}
-		buff[i] = malloc(sizeof(int) * width);
+		else if (ft_count_words(v.line) != v.width)
+			return (free(v.line), close(v.fd), -1);
+		buff[i] = malloc(sizeof(int) * v.width);
 		if (!buff[i])
-		{
-			free(line);
-			close(fd);
-			return (-1); // échec d'allocation
-		}
-		ft_fill_tab(buff[i], line, width);
-		free(line);
-		i++;
+			return (free(v.line), close(v.fd), -1);
+		ft_fill_tab(buff[i++], v.line, v.width);
+		free(v.line);
 	}
 	*rows = i;
-	close(fd);
-	return (0);
-	// Si on a lu au moins une ligne, on retourne 0
-	if (i > 0)
-		return (0);
-	return (-1); // fichier vide ou erreur de lecture
-	// Si on n'a pas lu de lignes, on retourne -1
-	// (fichier vide ou erreur de lecture)
-	// Si on a lu au moins une ligne, on retourne 0
-	// (buff rempli, rows et cols définis)
-	// On suppose que buff est déjà alloué avec une taille suffisante
-	// (par exemple, malloc(sizeof(int *) * 100) pour 100 lignes max)
-	// et que les lignes sont toutes de même longueur.
+	return (close(v.fd), 0);
 }
 
-void ft_fill_tab(int *tab, char *line, int width)
+void	ft_fill_tab(int *tab, char *line, int width)
 {
-    int     i = 0;
-    char    *token;
+	int		i;
+	char	*token;
 
-    token = ft_strtok(line, " ");
-    while (i < width && token)
-    {
-        tab[i] = ft_atoi(token);
-        i++;
-        token = ft_strtok(NULL, " ");
-    }
+	token = ft_strtok(line, " ");
+	i = 0;
+	while (i < width && token)
+	{
+		tab[i] = ft_atoi(token);
+		i++;
+		token = ft_strtok(NULL, " ");
+	}
 }
