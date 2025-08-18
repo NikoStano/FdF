@@ -6,84 +6,79 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 23:56:49 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/14 19:46:40 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/18 22:15:42 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1)
-{
-	int	dx;
-	int	sx;
-	int	dy;
-	int	sy;
-	int	err;
-	int	e2;
-
-	dx = ft_abs(x1 - x0);
-	sx = check_pos_point(x0, x1);
-	dy = -ft_abs(y1 - y0);
-	sy = check_pos_point(y0, y1);
-	err = dx + dy;
+void	draw_line(t_fdf *fdf, t_image img)
+{	
+	img.dx = ft_abs(img.x1 - img.x0);
+	img.sx = check_pos_point(img.x0, img.x1);
+	img.dy = -ft_abs(img.y1 - img.y0);
+	img.sy = check_pos_point(img.y0, img.y1);
+	img.err = img.dx + img.dy;
 	while (1)
 	{
-		mlx_pixel_put(mlx, win, x0, y0, 0xFFFFFF);
-		if (x0 == x1 && y0 == y1)
+		mlx_pixel_put(fdf->mlx, fdf->win, img.x0, img.y0, 0xFFFFFF);
+		if (img.x0 == img.x1 && img.y0 == img.y1)
 			break ;
-		e2 = 2 * err;
-		if (e2 >= dy)
+		img.e2 = 2 * img.err;
+		if (img.e2 >= img.dy)
 		{
-			err += dy;
-			x0 += sx;
+			img.err += img.dy;
+			img.x0 += img.sx;
 		}
-		if (e2 <= dx)
+		if (img.e2 <= img.dx)
 		{
-			err += dx;
-			y0 += sy;
+			img.err += img.dx;
+			img.y0 += img.sy;
 		}
 	}
 }
 
-static void	draw_map_internal(t_fdf *fdf, int offx, int offy, int sc, int zsc)
+static void	draw_shit(t_fdf *fdf, t_image img, int x, int y)
 {
-	int	y;
-	int	x;
-	int	rows;
-	int	cols;
-	int	z;
-	int	z_right;
-	int	z_down;
-	int	x0;
-	int	y0;
-	int	x1;
-	int	y1;
+	int		z;
 
-	rows = fdf->map->rows;
-	cols = fdf->map->cols;
+	z = fdf->buff[y][x];
+	img.x0 = (x - y) * fdf->view->scale + fdf->view->offset_x;
+	img.y0 = (x + y) * fdf->view->scale / 2 - z * fdf->view->z_scale + \
+		fdf->view->offset_y;
+	if (x < img.cols - 1)
+	{
+		img.z_right = fdf->buff[y][x + 1];
+		img.x1 = ((x + 1) - y) * fdf->view->scale + fdf->view->offset_x;
+		img.y1 = ((x + 1) + y) * fdf->view->scale / 2 - img.z_right * \
+			fdf->view->z_scale + fdf->view->offset_y;
+		draw_line(fdf, img);
+	}
+	if (y < img.rows - 1)
+	{
+		img.z_down = fdf->buff[y + 1][x];
+		img.x1 = (x - (y + 1)) * fdf->view->scale + fdf->view->offset_x;
+		img.y1 = (x + (y + 1)) * fdf->view->scale / 2 - img.z_down * \
+			fdf->view->z_scale + fdf->view->offset_y;
+		draw_line(fdf, img);
+	}
+}
+
+static void	draw_map_internal(t_fdf *fdf)
+{
+	int		y;
+	int		x;
+	t_image	img;
+
+	img.rows = fdf->map->rows;
+	img.cols = fdf->map->cols;
 	y = 0;
-	while (y < rows)
+	while (y < img.rows)
 	{
 		x = 0;
-		while (x < cols)
+		while (x < img.cols)
 		{
-			z = fdf->buff[y][x];
-			x0 = (x - y) * sc + offx;
-			y0 = (x + y) * sc / 2 - z * zsc + offy;
-			if (x < cols - 1)
-			{
-				z_right = fdf->buff[y][x + 1];
-				x1 = ((x + 1) - y) * sc + offx;
-				y1 = ((x + 1) + y) * sc / 2 - z_right * zsc + offy;
-				draw_line(fdf->mlx, fdf->win, x0, y0, x1, y1);
-			}
-			if (y < rows - 1)
-			{
-				z_down = fdf->buff[y + 1][x];
-				x1 = (x - (y + 1)) * sc + offx;
-				y1 = (x + (y + 1)) * sc / 2 - z_down * zsc + offy;
-				draw_line(fdf->mlx, fdf->win, x0, y0, x1, y1);
-			}
+			draw_shit(fdf, img, x, y);
 			x++;
 		}
 		y++;
@@ -93,11 +88,5 @@ static void	draw_map_internal(t_fdf *fdf, int offx, int offy, int sc, int zsc)
 void	draw_map_ctx(t_fdf *fdf)
 {
 	mlx_clear_window(fdf->mlx, fdf->win);
-	draw_map_internal(
-		fdf,
-		fdf->view->offset_x,
-		fdf->view->offset_y,
-		fdf->view->scale,
-		fdf->view->z_scale
-		);
+	draw_map_internal(fdf);
 }

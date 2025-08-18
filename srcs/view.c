@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 11:34:32 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/14 18:31:58 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/18 22:25:57 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void	apply_zoom(t_fdf *fdf, double factor, int p_x, int p_y)
 	fdf->view->offset_x = p_x + (int)round((fdf->view->offset_x - p_x) * k);
 	fdf->view->offset_y = p_y + (int)round((fdf->view->offset_y - p_y) * k);
 	fdf->view->scale = new;
-	fdf->view->z_scale = clampi((int)round(fdf->view->z_scale * k), 1, 1);
+	fdf->view->z_scale = clampi((int)round(fdf->view->z_scale * k-1), \
+		MIN_SCALE, MAX_SCALE);
 }

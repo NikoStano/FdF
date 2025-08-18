@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:02 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/14 19:37:13 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/18 22:37:25 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	init(t_fdf *fdf, char **av)
 {
-	fdf->buff = malloc(sizeof(int *) * 100);
+	fdf->buff = malloc(sizeof(int *) * 1000);
 	if (!fdf->buff)
 		return (perror("malloc failed"), 1);
 	fdf->view = malloc(sizeof(t_view));

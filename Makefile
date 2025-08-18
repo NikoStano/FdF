@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/13 12:54:40 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/18 22:18:50 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,15 +65,16 @@ bonus:			all
 	@$(COMPILE) -c $< -o $(<:.c=.o)
 	@echo "Compiling $<."
 
-localclean:
-	@$(RM) $(OBJS)
-	@echo "Removed object files."
+norminette:
+	@norminette $(SRCS) $(INCLUDE) $(LIBFT) $(GNL) $(PRINTF)
 
-clean:			localclean
+clean:
 	@make clean -s -C $(LIBFT)
 	@make clean -s -C $(GNL)
 	@make clean -s -C $(PRINTF)
 	@make clean -s -C $(MLX)
+	@$(RM) $(OBJS)
+	@echo "Obj file removed "
 
 fclean:			clean
 	@make fclean -s -C $(LIBFT)
@@ -84,4 +85,4 @@ fclean:			clean
 
 re:				fclean all
 
-.PHONY:			all clean fclean re localclean bonus
+.PHONY:			all norminette clean fclean re

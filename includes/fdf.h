@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 18:46:36 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/14 19:52:16 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/18 22:37:48 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "ft_printf.h"
-# include "mlx.h"
+# include "../lib/minilibx/mlx.h"
 # include <X11/keysym.h>
 
 // Constantes //
@@ -55,6 +55,24 @@ typedef struct s_valid
 	char	*line;
 	int		width;
 }				t_valid;
+
+typedef struct s_image
+{
+	int	rows;
+	int	cols;
+	int	z_right;
+	int	z_down;
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
+	int	dx;
+	int	sx;
+	int	dy;
+	int	sy;
+	int	err;
+	int	e2;
+}				t_image;
 
 typedef struct s_map
 {
@@ -97,7 +115,7 @@ char	*ft_strtok(char *str, const char *delim);
 void	ft_fill_tab(int *tab, char *line, int width);
 
 // Dessin //
-void	draw_line(void *mlx, void *win, int x0, int y0, int x1, int y1);
+void	draw_line(t_fdf *fdf, t_image img);
 void	draw_map_ctx(t_fdf *fdf);
 
 // Hooks //
