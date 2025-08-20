@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:58:48 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/14 18:56:20 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/20 08:53:22 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	ft_check_valid(char *filename, int **buff, int *rows, int *cols)
 			v.width = ft_count_words(v.line);
 			*cols = v.width;
 		}
-		else if (ft_count_words(v.line) != v.width)
-			return (free(v.line), close(v.fd), -1);
 		buff[i] = malloc(sizeof(int) * v.width);
 		if (!buff[i])
 			return (free(v.line), close(v.fd), -1);
@@ -49,8 +47,11 @@ void	ft_fill_tab(int *tab, char *line, int width)
 	i = 0;
 	while (i < width && token)
 	{
-		tab[i] = ft_atoi(token);
-		i++;
+		if (*token != '\0')
+		{
+			tab[i] = ft_atoi(token);
+			i++;
+		}
 		token = ft_strtok(NULL, " ");
 	}
 }

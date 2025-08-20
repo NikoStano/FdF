@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 18:46:36 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/18 22:37:48 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/20 08:38:10 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,6 @@ typedef struct s_fdf
 	void	*mlx;
 	void	*win;
 	int		**buff;
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
-	int		e2;
 	t_point	**point;
 	t_map	*map;
 	t_view	*view;
