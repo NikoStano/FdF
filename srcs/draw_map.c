@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 23:56:49 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/20 11:58:24 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:54:22 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,6 @@ static inline void	my_mlx_pixel_put(t_image *img, int x, int y, int color)
 		return ;
 	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)dst = (unsigned int)color;
-}
-
-static void	draw_img(t_image *img)
-{
-	my_mlx_pixel_put(img, img->x0, img->y0, img->color);
-}
-
-void	draw_line(t_image img)
-{	
-	img.dx = ft_abs(img.x1 - img.x0);
-	img.sx = check_pos_point(img.x0, img.x1);
-	img.dy = -ft_abs(img.y1 - img.y0);
-	img.sy = check_pos_point(img.y0, img.y1);
-	img.err = img.dx + img.dy;
-	while (1)
-	{
-		draw_img(&img);
-		if (img.x0 == img.x1 && img.y0 == img.y1)
-			break ;
-		img.e2 = 2 * img.err;
-		if (img.e2 >= img.dy)
-		{
-			img.err += img.dy;
-			img.x0 += img.sx;
-		}
-		if (img.e2 <= img.dx)
-		{
-			img.err += img.dx;
-			img.y0 += img.sy;
-		}
-	}
 }
 
 static void	draw_shit(t_fdf *fdf, t_image img, int x, int y)
@@ -95,13 +64,32 @@ static void	draw_map_internal(t_fdf *fdf, t_image *img)
 		while (x < img->cols)
 		{
 			z = fdf->buff[y][x];
-			if (z != 0)
-				img->color = 0xFFAA33;
+			if (z > 0)
+				img->color = 0x309060;
+			else if (z < 0)
+				img->color = 0x306090;
 			else
-				img->color = 0xFFFFFF;
+				img->color = 0x906030;
 			draw_shit(fdf, *img, x, y);
 			x++;
 		}
 		y++;
 	}
+}
+
+void	draw_img(t_image *img)
+{
+	my_mlx_pixel_put(img, img->x0, img->y0, img->color);
+}
+
+void	draw_map_ctx(t_fdf *fdf)
+{
+	t_image	img;
+
+	mlx_clear_window(fdf->mlx, fdf->win);
+	img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
+	draw_map_internal(fdf, &img);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, img.img, 0, 0);
+	mlx_destroy_image(fdf->mlx, img.img);
 }

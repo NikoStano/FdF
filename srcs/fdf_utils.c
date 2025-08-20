@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:55:05 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/20 11:58:31 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:43:08 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,28 @@ char	*ft_strtok(char *str, const char *delim)
 	return (token);
 }
 
-void	draw_map_ctx(t_fdf *fdf)
-{
-	t_image	img;
-
-	mlx_clear_window(fdf->mlx, fdf->win);
-	img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	draw_map_internal(fdf, &img);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, img.img, 0, 0);
-	mlx_destroy_image(fdf->mlx, img.img);
+void	draw_line(t_image img)
+{	
+	img.dx = ft_abs(img.x1 - img.x0);
+	img.sx = check_pos_point(img.x0, img.x1);
+	img.dy = -ft_abs(img.y1 - img.y0);
+	img.sy = check_pos_point(img.y0, img.y1);
+	img.err = img.dx + img.dy;
+	while (1)
+	{
+		draw_img(&img);
+		if (img.x0 == img.x1 && img.y0 == img.y1)
+			break ;
+		img.e2 = 2 * img.err;
+		if (img.e2 >= img.dy)
+		{
+			img.err += img.dy;
+			img.x0 += img.sx;
+		}
+		if (img.e2 <= img.dx)
+		{
+			img.err += img.dx;
+			img.y0 += img.sy;
+		}
+	}
 }

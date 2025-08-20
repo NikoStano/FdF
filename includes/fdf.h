@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 18:46:36 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/20 11:59:00 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/20 13:03:10 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # include <X11/keysym.h>
 
 // Constantes //
-# define WIDTH 1000
-# define HEIGHT 800
+# define WIDTH 800
+# define HEIGHT 600
 # define SCALE 20
 # define Z_SCALE 5
 # define OFFSET_X 500
@@ -115,7 +115,8 @@ char	*ft_strtok(char *str, const char *delim);
 void	ft_fill_tab(int *tab, char *line, int width);
 
 // Dessin //
-void	draw_line(t_image img);
+void	draw_img(t_image *img);
+void	draw_map_ctx(t_fdf *fdf);
 
 // Hooks //
 int		on_key(int keycode, t_fdf *fdf);
@@ -133,7 +134,7 @@ int		ft_abs(int n);
 int		check_pos_point(int x0, int x1);
 int		ft_count_words(char *str);
 char	*ft_strtok(char *str, const char *delim);
-void	draw_map_ctx(t_fdf *fdf);
+void	draw_line(t_image img);
 
 // Points //
 t_point	**alloc_points_grid(int rows, int cols);
