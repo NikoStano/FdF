@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:47:02 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/18 22:37:25 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:56:26 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ static int	init(t_fdf *fdf, char **av)
 {
 	fdf->buff = malloc(sizeof(int *) * 1000);
 	if (!fdf->buff)
-		return (perror("malloc failed"), 1);
+		return (perror("Error: malloc failed on buff"), 1);
 	fdf->view = malloc(sizeof(t_view));
 	if (!fdf->view)
-		return (perror("malloc failed"), 1);
+		return (perror("Error: malloc failed on struct view"), 1);
 	fdf->view->map.cols = 0;
 	fdf->view->map.rows = 0;
 	if (ft_check_valid(av[1], fdf->buff, &(fdf->view->map.rows), \
 		&(fdf->view->map.cols)) != 0)
-		return (ft_printf("Erreur: lecture du fichier %s\n", av[1]), 1);
+		return (ft_printf("Error: lecture du fichier %s\n", av[1]), 1);
 	fdf->view->map.point = alloc_points_grid(fdf->view->map.rows, \
 		fdf->view->map.cols);
 	if (!fdf->view->map.point)
-		return (perror("alloc points"), 1);
+		return (perror("Error: allocation on grid point !"), 1);
 	return (0);
 }
 
@@ -44,10 +44,10 @@ static int	launch(t_fdf *fdf)
 	fdf->map = &(fdf->view->map);
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
-		return (ft_printf("Erreur: mlx_init()\n"), 1);
+		return (perror("Erreur: mlx_init()"), 1);
 	fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, "FdF simple");
 	if (!fdf->win)
-		return (ft_printf("Erreur: mlx_new_window()\n"), 1);
+		return (perror("Erreur: mlx_new_window()"), 1);
 	draw_map_ctx(fdf);
 	return (0);
 }

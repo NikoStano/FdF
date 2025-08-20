@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:55:05 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/18 22:37:59 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:58:31 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,16 @@ char	*ft_strtok(char *str, const char *delim)
 	else
 		next_token = NULL;
 	return (token);
+}
+
+void	draw_map_ctx(t_fdf *fdf)
+{
+	t_image	img;
+
+	mlx_clear_window(fdf->mlx, fdf->win);
+	img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
+	draw_map_internal(fdf, &img);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, img.img, 0, 0);
+	mlx_destroy_image(fdf->mlx, img.img);
 }
