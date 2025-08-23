@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:33:41 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/08 15:25:47 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/21 21:03:25 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "get_next_line.h"
 
 static char	*read_line(int fd, char *buffer)
 {

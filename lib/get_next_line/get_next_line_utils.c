@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:41:15 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/05 02:45:23 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/21 21:03:23 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen_gnl(char *s)
 {

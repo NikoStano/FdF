@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   define.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/21 21:21:50 by nistanoj          #+#    #+#             */
+/*   Updated: 2025/08/22 03:33:11 by nistanoj         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef DEFINE_H
+# define DEFINE_H
+
+/* DEFINES */
+# define NAME "FdF 42 - nistanoj"
+# define WIDTH 1200
+# define HEIGHT 800
+# define SCALE_DEFAULT 20
+# define ZS_DEFAULT 5
+# define OFF_X_DEFAULT 500
+# define OFF_Y_DEFAULT 300
+# define MIN_SCALE 2
+# define MAX_SCALE 200
+# define Z_MIN 0.05f
+# define Z_MAX 1000.f
+# define STEP 20
+# define ROT_STEP 0.08726646259971647  // 5° en radians
+
+/* MOUSE */
+# define BTN_LEFT 1
+# define BTN_RIGHT 3
+# define BTN_MUP 4
+# define BTN_MDN 5
+
+#endif

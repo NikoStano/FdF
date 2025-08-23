@@ -5,140 +5,169 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/14 18:46:36 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/20 13:03:10 by nistanoj         ###   ########.fr       */
+/*   Created: 2025/08/21 12:36:42 by nistanoj          #+#    #+#             */
+/*   Updated: 2025/08/23 19:14:38 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-// Includes //
+/* LIBRARIES */
 # include <unistd.h>
-# include <stdio.h>
+# include <limits.h>
 # include <stdlib.h>
-# include <math.h>
-# include <errno.h>
 # include <fcntl.h>
-# include "libft.h"
-# include "get_next_line.h"
-# include "ft_printf.h"
-# include "../lib/minilibx/mlx.h"
+# include <errno.h>
 # include <X11/keysym.h>
+# include <math.h>
 
-// Constantes //
-# define WIDTH 800
-# define HEIGHT 600
-# define SCALE 20
-# define Z_SCALE 5
-# define OFFSET_X 500
-# define OFFSET_Y 400
-# define MIN_SCALE 2
-# define MAX_SCALE 200
+/* PROJECT HEADERS */
+# include "colors.h"
+# include "define.h"
+# include "../lib/libft/libft.h"
+# include "../lib/get_next_line/get_next_line.h"
+# include "../lib/ft_printf/ft_printf.h"
+# include "../lib/minilibx/mlx.h"
 
-// Souris //
-# define BTN_LEFT 1
-# define BTN_SCROLL_UP 4
-# define BTN_SCROLL_DOWN 5
-
-// Structures de données //
+/* STRUCT */
 typedef struct s_point
 {
 	int	x;
 	int	y;
 	int	z;
-}				t_point;
-
-typedef struct s_valid
-{
-	int		fd;
-	char	*line;
-	int		width;
-}				t_valid;
-
-typedef struct s_image
-{
-	int		rows;
-	int		cols;
-	int		z_right;
-	int		z_down;
-	int		x0;
-	int		y0;
-	int		x1;
-	int		y1;
-	int		dx;
-	int		sx;
-	int		dy;
-	int		sy;
-	int		err;
-	int		e2;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		color;
-}				t_image;
+	int	color;
+}			t_point;
 
 typedef struct s_map
 {
 	int		rows;
 	int		cols;
-	t_point	**point;
-}				t_map;
+	int		**zbuf;
+	int		**cbuf;
+	t_point	**pt;
+}			t_map;
+
+typedef struct s_bres
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+}			t_bres;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		w;
+	int		h;
+}			t_img;
 
 typedef struct s_view
 {
-	int		offset_x;
-	int		offset_y;
-	int		last_x;
-	int		last_y;
-	int		mouse_pressed;
+	int		off_x;
+	int		off_y;
 	int		scale;
 	int		z_scale;
-	t_map	map;
-}				t_view;
+	int		mouse_down;
+	int		last_x;
+	int		last_y;
+	double	ang_z;
+	double	piv_x;
+	double	piv_y;
+}			t_view;
 
-typedef struct s_fdf
+typedef struct s_v2
+{
+	int	x;
+	int	y;
+}			t_v2;
+
+typedef struct s_v3
+{
+	int	x;
+	int	y;
+	int	z;
+}			t_v3;
+
+typedef struct s_proj
+{
+	long	sc;
+	double	c;
+	double	s;
+	double	tx;
+	double	ty;
+	double	xr;
+	double	yr;
+}			t_proj;
+
+typedef struct s_app
 {
 	void	*mlx;
 	void	*win;
-	int		**buff;
-	t_point	**point;
-	t_map	*map;
-	t_view	*view;
-}				t_fdf;
+	t_img	fb;
+	t_map	map;
+	t_view	view;
+}			t_app;
 
-// Prototypes //
-int		ft_check_valid(char *filename, int **buff, int *rows, int *cols);
-char	*ft_strtok(char *str, const char *delim);
-void	ft_fill_tab(int *tab, char *line, int width);
+/* DRAW */
+/* image.c */
+void	img_create(t_app *a, t_img *img, int w, int h);
+void	img_destroy(t_app *a, t_img *img);
+void	img_clear(t_img *img);
+void	put_px(t_img *img, int x, int y, int color);
 
-// Dessin //
-void	draw_img(t_image *img);
-void	draw_map_ctx(t_fdf *fdf);
+/* line.c */
+void	draw_line(t_img *img, t_v2 a, t_v2 b, int color);
 
-// Hooks //
-int		on_key(int keycode, t_fdf *fdf);
-int		on_mouse(int button, int x, int y, t_fdf *fdf);
-int		on_mouse_release(int button, int x, int y, t_fdf *fdf);
-int		on_motion(int x, int y, t_fdf *fdf);
-int		on_destroy(t_fdf *fdf);
+/* project.c */
+void	iso_project(t_v3 p, t_view *v, t_v2 *out);
 
-// Zoom //
-void	view_reset(t_view *v);
-void	apply_zoom(t_fdf *fdf, double factor, int pivot_x, int pivot_y);
+/* render.c */
+void	render(t_app *a);
 
-// Utils //
+/* PARSE */
+/* parse.c */
+int		map_load(t_map *m, const char *path);
+
+/* parse_util.c */
+int		parse_line_into(int *dst_z, int *dst_c, char *line, int cols);
+
+/* UTILS */
+/* utils_1.c */
+int		clampi(int v, int lo, int hi);
 int		ft_abs(int n);
-int		check_pos_point(int x0, int x1);
-int		ft_count_words(char *str);
-char	*ft_strtok(char *str, const char *delim);
-void	draw_line(t_image img);
+int		word_count(const char *s);
+int		safe_atoi(const char *s, int *out);
+void	ft_split_free(char **sp);
 
-// Points //
-t_point	**alloc_points_grid(int rows, int cols);
-void	free_points_grid(t_point **grid, int rows);
-void	fill_points_from_buff(t_point **pts, int **buff, int rows, int cols);
+/* utils_2.c*/
+int		count_cols(const char *s);
+void	free_stuff(int **stuff, int rows);
+void	map_free(t_map *m);
+int		base_color(int z);
+
+/* VIEW */
+/* hooks */
+int		on_key(int key, t_app *a);
+int		on_mouse(int btn, int x, int y, t_app *a);
+int		on_mouse_release(int btn, int x, int y, t_app *a);
+int		on_motion(int x, int y, t_app *a);
+int		on_destroy(t_app *a);
+
+/* view.c */
+void	view_reset(t_view *v);
+void	view_zoom(t_view *v, t_v2 pivot, int num, int den);
+void	view_rotate_z(t_view *v, double delta);
+
+/* init.c */
+int		win_init(t_app *a, const char *path);
+void	win_destroy(t_app *a);
+int		win_run(t_app *a);
 
 #endif

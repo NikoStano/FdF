@@ -6,38 +6,49 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/18 22:18:50 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/23 19:31:14 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	FdF
 
-INCLUDE		=	includes
+HEADER		=	includes
 
 LIBFT		=	lib/libft/
-GNL			=	lib/gnl/
-PRINTF		=	lib/printf/
+GNL			=	lib/get_next_line/
+PRINTF		=	lib/ft_printf/
 MLX			=	lib/minilibx/
 LIBFT_A		=	$(addprefix $(LIBFT), libft.a)
 GNL_A		=	$(addprefix $(GNL), libgnl.a)
 PRINTF_A	=	$(addprefix $(PRINTF), libprintf.a)
 MLX_A		=	$(addprefix $(MLX), libmlx.a)
 
+INC_DIR		=	includes \
+				lib/libft \
+				lib/get_next_line \
+				lib/ft_printf \
+				lib/minilibx
+INCLUDE		=	$(addprefix -I, $(INC_DIR))
+
 CC			=	cc
 CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE)
 COMPILE		=	$(CC) $(CFLAGS)
-RM			=	rm -f
+RM			=	rm -rf
+CFLAGS 		+=	-fsanitize=address -g
 
 SRCS_DIR	=	srcs/
-# SRCS		=	test.c
-SRCS		=	$(SRCS_DIR)fdf.c \
-				$(SRCS_DIR)fdf_utils.c \
- 				$(SRCS_DIR)draw_map.c \
-				$(SRCS_DIR)parse.c \
-				$(SRCS_DIR)hook_check.c \
-				$(SRCS_DIR)points.c \
-				$(SRCS_DIR)view.c
-
+SRCS		=	$(SRCS_DIR)/main.c \
+				$(SRCS_DIR)/init.c \
+				$(SRCS_DIR)/parse/parse.c \
+				$(SRCS_DIR)/parse/parse_utils.c \
+				$(SRCS_DIR)/draw/image.c \
+				$(SRCS_DIR)/draw/line.c \
+				$(SRCS_DIR)/draw/project.c \
+				$(SRCS_DIR)/draw/render.c \
+				$(SRCS_DIR)/view/view.c \
+				$(SRCS_DIR)/view/hooks.c \
+				$(SRCS_DIR)/utils/utils_1.c \
+				$(SRCS_DIR)/utils/utils_2.c
 OBJS		=	$(SRCS:%.c=%.o)
 
 all:			$(NAME)
@@ -45,7 +56,7 @@ all:			$(NAME)
 $(NAME):		$(OBJS) $(LIBFT_A) $(GNL_A) $(PRINTF_A) $(MLX_A)		
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(PRINTF) -lprintf -L$(GNL) \
 	-lgnl -L$(MLX) -lmlx -lXext -lX11 -lm -o $(NAME)
-	@echo "Linked into executable \033[0;32mFdF\033[0m."
+	@echo "Linked into executable \033[1;32mFdF\033[0m."
 
 $(LIBFT_A):
 	@make -s -C $(LIBFT)
@@ -59,14 +70,14 @@ $(PRINTF_A):
 $(MLX_A):
 	@make -s -C $(MLX)
 
-bonus:			all
-
 .c.o:
 	@$(COMPILE) -c $< -o $(<:.c=.o)
 	@echo "Compiling $<."
 
 norminette:
-	@norminette $(SRCS) $(INCLUDE) $(LIBFT) $(GNL) $(PRINTF)
+	@norminette $(SRCS) $(HEADER) $(LIBFT) $(GNL) $(PRINTF)
+# 	@python3 -m norminette $(SRCS) $(HEADER) $(LIBFT) $(GNL) $(PRINTF)
+	@echo "\033[1;32mNorminette check completed. \033[0m"
 
 clean:
 	@make clean -s -C $(LIBFT)
@@ -85,4 +96,6 @@ fclean:			clean
 
 re:				fclean all
 
-.PHONY:			all norminette clean fclean re
+bonus:			all
+
+.PHONY:			all norminette clean fclean re bonus
