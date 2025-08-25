@@ -6,14 +6,13 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 21:21:50 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/22 03:33:11 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:28:13 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
 # define DEFINE_H
 
-/* DEFINES */
 # define NAME "FdF 42 - nistanoj"
 # define WIDTH 1200
 # define HEIGHT 800
@@ -27,8 +26,8 @@
 # define Z_MAX 1000.f
 # define STEP 20
 # define ROT_STEP 0.08726646259971647  // 5° en radians
+# define PI 3.141592653589793
 
-/* MOUSE */
 # define BTN_LEFT 1
 # define BTN_RIGHT 3
 # define BTN_MUP 4

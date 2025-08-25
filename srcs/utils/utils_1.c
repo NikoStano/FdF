@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strsafe.c                                          :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:34:16 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/21 21:33:34 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:27:29 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
+
+int	clampi(int v, int lo, int hi)
+{
+	if (v < lo)
+		return (lo);
+	if (v > hi)
+		return (hi);
+	return (v);
+}
+
+int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
 
 int	word_count(const char *s)
 {

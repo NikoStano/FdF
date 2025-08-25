@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:34:50 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/22 03:39:57 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/25 11:43:12 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	on_key(int key, t_app *a)
 		view_rotate_z(&a->view, ROT_STEP);
 	else if (key == XK_e)
 		view_rotate_z(&a->view, -ROT_STEP);
+	else if (key == XK_Shift_L && a->view.z_scale <= 8)
+		a->view.z_scale += 1;
+	else if (key == XK_Control_L && a->view.z_scale > 1)
+		a->view.z_scale -= 1;
 	else
 		return (0);
 	render(a);

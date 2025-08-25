@@ -6,11 +6,11 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/23 19:31:14 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/08/25 12:03:59 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	FdF
+NAME		=	fdf
 
 HEADER		=	includes
 
@@ -34,7 +34,7 @@ CC			=	cc
 CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE)
 COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -rf
-CFLAGS 		+=	-fsanitize=address -g
+# CFLAGS 		+=	-fsanitize=address -g
 
 SRCS_DIR	=	srcs/
 SRCS		=	$(SRCS_DIR)/main.c \
@@ -56,7 +56,7 @@ all:			$(NAME)
 $(NAME):		$(OBJS) $(LIBFT_A) $(GNL_A) $(PRINTF_A) $(MLX_A)		
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(PRINTF) -lprintf -L$(GNL) \
 	-lgnl -L$(MLX) -lmlx -lXext -lX11 -lm -o $(NAME)
-	@echo "Linked into executable \033[1;32mFdF\033[0m."
+	@echo "Linked into executable \033[1;32m$(NAME)\033[0m."
 
 $(LIBFT_A):
 	@make -s -C $(LIBFT)
@@ -72,12 +72,12 @@ $(MLX_A):
 
 .c.o:
 	@$(COMPILE) -c $< -o $(<:.c=.o)
-	@echo "Compiling $<."
+	@echo "Compiling \033[1;32m$<\033[0m."
 
 norminette:
 	@norminette $(SRCS) $(HEADER) $(LIBFT) $(GNL) $(PRINTF)
 # 	@python3 -m norminette $(SRCS) $(HEADER) $(LIBFT) $(GNL) $(PRINTF)
-	@echo "\033[1;32mNorminette check completed. \033[0m"
+	@echo "\033[1;32mNorminette check completed.\033[0m"
 
 clean:
 	@make clean -s -C $(LIBFT)
@@ -85,14 +85,14 @@ clean:
 	@make clean -s -C $(PRINTF)
 	@make clean -s -C $(MLX)
 	@$(RM) $(OBJS)
-	@echo "Obj file removed "
+	@echo "\033[1;32mOBJ file removed.\033[0m"
 
 fclean:			clean
 	@make fclean -s -C $(LIBFT)
 	@make fclean -s -C $(GNL)
 	@make fclean -s -C $(PRINTF)
 	@$(RM) $(NAME)
-	@echo "Removed executable."
+	@echo "\033[1;32mExecutable removed.\033[0m"
 
 re:				fclean all
 
