@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:36:42 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/23 19:14:38 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/08/27 17:51:54 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <math.h>
 
 /* PROJECT HEADERS */
+// # include "mac_keys.h"
 # include "colors.h"
 # include "define.h"
 # include "../lib/libft/libft.h"
