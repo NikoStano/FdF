@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:35:19 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/23 19:27:26 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:49:02 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ static int	alloc_cbuf(t_map *m)
 	{
 		m->cbuf[y] = (int *)malloc(sizeof(int) * m->cols);
 		if (!m->cbuf[y])
+		{
 			free_stuff(m->cbuf, y);
+			m->cbuf = NULL;
+			return (1);
+		}
 		x = 0;
 		while (x < m->cols)
 		{
@@ -116,10 +120,6 @@ int	map_load(t_map *m, const char *path)
 {
 	int		fd;
 
-	m->rows = 0;
-	m->cols = 0;
-	m->pt = NULL;
-	m->zbuf = NULL;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (1);

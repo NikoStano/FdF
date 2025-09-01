@@ -6,14 +6,14 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 08:34:28 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/04 17:01:42 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/09/01 16:01:10 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libgnl.a
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -ggdb
 COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -f
 

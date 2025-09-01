@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/25 12:03:59 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/09/01 15:59:15 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,24 +31,24 @@ INC_DIR		=	includes \
 INCLUDE		=	$(addprefix -I, $(INC_DIR))
 
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE)
+CFLAGS		=	-Wall -Werror -Wextra -I$(INCLUDE) -ggdb
 COMPILE		=	$(CC) $(CFLAGS)
 RM			=	rm -rf
 # CFLAGS 		+=	-fsanitize=address -g
 
 SRCS_DIR	=	srcs/
-SRCS		=	$(SRCS_DIR)/main.c \
-				$(SRCS_DIR)/init.c \
-				$(SRCS_DIR)/parse/parse.c \
-				$(SRCS_DIR)/parse/parse_utils.c \
-				$(SRCS_DIR)/draw/image.c \
-				$(SRCS_DIR)/draw/line.c \
-				$(SRCS_DIR)/draw/project.c \
-				$(SRCS_DIR)/draw/render.c \
-				$(SRCS_DIR)/view/view.c \
-				$(SRCS_DIR)/view/hooks.c \
-				$(SRCS_DIR)/utils/utils_1.c \
-				$(SRCS_DIR)/utils/utils_2.c
+SRCS		=	$(SRCS_DIR)main.c \
+				$(SRCS_DIR)init.c \
+				$(SRCS_DIR)parse/parse.c \
+				$(SRCS_DIR)parse/parse_utils.c \
+				$(SRCS_DIR)draw/image.c \
+				$(SRCS_DIR)draw/line.c \
+				$(SRCS_DIR)draw/project.c \
+				$(SRCS_DIR)draw/render.c \
+				$(SRCS_DIR)view/view.c \
+				$(SRCS_DIR)view/hooks.c \
+				$(SRCS_DIR)utils/utils_1.c \
+				$(SRCS_DIR)utils/utils_2.c
 OBJS		=	$(SRCS:%.c=%.o)
 
 all:			$(NAME)

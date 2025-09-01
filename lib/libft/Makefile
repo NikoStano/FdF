@@ -6,14 +6,14 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/26 16:35:06 by nistanoj          #+#    #+#              #
-#    Updated: 2025/08/21 19:40:47 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/09/01 16:01:20 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	libft.a
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -ggdb
 COMPILE			=	$(CC) $(CFLAGS)
 
 SRCS			=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
