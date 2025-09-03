@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/09/01 15:59:15 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/09/03 16:14:12 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,20 +14,14 @@ NAME		=	fdf
 
 HEADER		=	includes
 
-LIBFT		=	lib/libft/
-GNL			=	lib/get_next_line/
-PRINTF		=	lib/ft_printf/
-MLX			=	lib/minilibx/
+LIBFT		=	libft/
+MLX			=	minilibx-linux/
 LIBFT_A		=	$(addprefix $(LIBFT), libft.a)
-GNL_A		=	$(addprefix $(GNL), libgnl.a)
-PRINTF_A	=	$(addprefix $(PRINTF), libprintf.a)
 MLX_A		=	$(addprefix $(MLX), libmlx.a)
 
 INC_DIR		=	includes \
-				lib/libft \
-				lib/get_next_line \
-				lib/ft_printf \
-				lib/minilibx
+				libft \
+				minilibx-linux
 INCLUDE		=	$(addprefix -I, $(INC_DIR))
 
 CC			=	cc
@@ -53,19 +47,13 @@ OBJS		=	$(SRCS:%.c=%.o)
 
 all:			$(NAME)
 
-$(NAME):		$(OBJS) $(LIBFT_A) $(GNL_A) $(PRINTF_A) $(MLX_A)		
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(PRINTF) -lprintf -L$(GNL) \
-	-lgnl -L$(MLX) -lmlx -lXext -lX11 -lm -o $(NAME)
+$(NAME):		$(OBJS) $(LIBFT_A) $(MLX_A)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -L$(MLX) -lmlx -lXext -lX11 \
+	-lm -o $(NAME)
 	@echo "Linked into executable \033[1;32m$(NAME)\033[0m."
 
 $(LIBFT_A):
 	@make -s -C $(LIBFT)
-
-$(GNL_A):
-	@make -s -C $(GNL)
-
-$(PRINTF_A):
-	@make -s -C $(PRINTF)
 
 $(MLX_A):
 	@make -s -C $(MLX)
@@ -75,22 +63,17 @@ $(MLX_A):
 	@echo "Compiling \033[1;32m$<\033[0m."
 
 norminette:
-	@norminette $(SRCS) $(HEADER) $(LIBFT) $(GNL) $(PRINTF)
-# 	@python3 -m norminette $(SRCS) $(HEADER) $(LIBFT) $(GNL) $(PRINTF)
+	@norminette $(SRCS) $(HEADER) $(LIBFT)
 	@echo "\033[1;32mNorminette check completed.\033[0m"
 
 clean:
 	@make clean -s -C $(LIBFT)
-	@make clean -s -C $(GNL)
-	@make clean -s -C $(PRINTF)
 	@make clean -s -C $(MLX)
 	@$(RM) $(OBJS)
 	@echo "\033[1;32mOBJ file removed.\033[0m"
 
 fclean:			clean
 	@make fclean -s -C $(LIBFT)
-	@make fclean -s -C $(GNL)
-	@make fclean -s -C $(PRINTF)
 	@$(RM) $(NAME)
 	@echo "\033[1;32mExecutable removed.\033[0m"
 

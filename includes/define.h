@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 21:21:50 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/25 11:28:13 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:03:31 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,10 @@
 # define BTN_RIGHT 3
 # define BTN_MUP 4
 # define BTN_MDN 5
+
+# define GREEN 0x30A060
+# define BLUE 0x305090
+# define BROWN 0x906030
+# define WHITE 0xFFFFFF
 
 #endif

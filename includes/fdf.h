@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:36:42 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/27 17:51:54 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:14:43 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,9 @@
 # include <X11/keysym.h>
 # include <math.h>
 
-/* PROJECT HEADERS */
-// # include "mac_keys.h"
-# include "colors.h"
 # include "define.h"
-# include "../lib/libft/libft.h"
-# include "../lib/get_next_line/get_next_line.h"
-# include "../lib/ft_printf/ft_printf.h"
-# include "../lib/minilibx/mlx.h"
+# include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
 
 /* STRUCT */
 typedef struct s_point
