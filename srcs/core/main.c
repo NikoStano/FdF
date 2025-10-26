@@ -6,11 +6,11 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:35:23 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/22 01:43:29 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/26 15:20:38 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../../includes/fdf.h"
 
 int	main(int ac, char **av)
 {

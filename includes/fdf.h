@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:36:42 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/09/03 16:14:43 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/26 17:24:24 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ typedef struct s_view
 	int		mouse_down;
 	int		last_x;
 	int		last_y;
+	int		projection;
+	int		auto_rotate;
+	int		color_mode;
+	double	ang_x;
+	double	ang_y;
 	double	ang_z;
 	double	piv_x;
 	double	piv_y;
@@ -102,6 +107,21 @@ typedef struct s_proj
 	double	yr;
 }			t_proj;
 
+typedef struct s_rot
+{
+	double	c;
+	double	s;
+	double	xr;
+	double	yr;
+	double	zr;
+	double	cx;
+	double	sx;
+	double	cy;
+	double	sy;
+	double	cz;
+	double	sz;
+}			t_rot;
+
 typedef struct s_app
 {
 	void	*mlx;
@@ -121,9 +141,6 @@ void	put_px(t_img *img, int x, int y, int color);
 /* line.c */
 void	draw_line(t_img *img, t_v2 a, t_v2 b, int color);
 
-/* project.c */
-void	iso_project(t_v3 p, t_view *v, t_v2 *out);
-
 /* render.c */
 void	render(t_app *a);
 
@@ -133,6 +150,22 @@ int		map_load(t_map *m, const char *path);
 
 /* parse_util.c */
 int		parse_line_into(int *dst_z, int *dst_c, char *line, int cols);
+
+/* PROJECT */
+/* project.c */
+void	iso_project(t_v3 p, t_view *v, t_v2 *out);
+
+/* project2.c */
+void	parallel_project(t_v3 p, t_view *v, t_v2 *out);
+void	conic_project(t_v3 p, t_view *v, t_v2 *out);
+void	project(t_v3 p, t_view *v, t_v2 *out);
+
+/* project3.c */
+void	parallel_project_3d(t_v3 p, t_view *v, t_v2 *out);
+void	conic_project_3d(t_v3 p, t_view *v, t_v2 *out);
+
+/* project4.c */
+void	iso_project_3d(t_v3 p, t_view *v, t_v2 *out);
 
 /* UTILS */
 /* utils_1.c */
@@ -160,6 +193,12 @@ int		on_destroy(t_app *a);
 void	view_reset(t_view *v);
 void	view_zoom(t_view *v, t_v2 pivot, int num, int den);
 void	view_rotate_z(t_view *v, double delta);
+void	view_rotate_x(t_view *v, double delta);
+void	view_rotate_y(t_view *v, double delta);
+void	draw_hud(t_app *a);
+int		interpolate_color(int c1, int c2, float ratio);
+int		get_color(t_app *a, int x, int y, int z);
+int		auto_rotate_loop(t_app *a);
 
 /* init.c */
 int		win_init(t_app *a, const char *path);

@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:35:12 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/22 01:39:11 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/26 15:54:44 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	img_create(t_app *a, t_img *img, int w, int h)
 	img->w = w;
 	img->h = h;
 	img->img = mlx_new_image(a->mlx, w, h);
-	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, \
-		&img->endian);
+	img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_len,
+			&img->endian);
 }
 
 void	img_destroy(t_app *a, t_img *img)

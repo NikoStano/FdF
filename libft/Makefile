@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/26 16:35:06 by nistanoj          #+#    #+#              #
-#    Updated: 2025/09/03 15:56:08 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/10/26 15:49:17 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME			=	libft.a
 
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror -ggdb
-COMPILE			=	$(CC) $(CFLAGS)
+DEPFLAGS	=	-MMD -MP
+COMPILE		=	$(CC) $(CFLAGS) $(DEPFLAGS)
+RM			=	rm -rf
 
 SRCS			=	ft_atoi.c \
 					ft_bzero.c \
@@ -71,22 +73,41 @@ SRCS			=	ft_atoi.c \
 					ft_print_ptr.c \
 					ft_printf.c \
 
-OBJ				=	$(SRCS:%.c=%.o)
+DIR_OBJ			=	obj/
+OBJS				=	$(SRCS:%.c=$(DIR_OBJ)%.o)
+DEPS		=	$(OBJ:.o=.d)
 
-all			:	$(NAME)
+RED			=	\033[0;31m
+GREEN		=	\033[0;32m
+L_GREEN		=	\033[1;32m
+YELLOW		=	\033[0;33m
+BLUE		=	\033[0;34m
+MAGENTA		=	\033[0;35m
+CYAN		=	\033[0;36m
+BOLD		=	\033[1m
+RESET		=	\033[0m
 
-$(NAME)		:	$(OBJ)
-	ar rcs $@ $^
+all:	$(NAME)
 
-%.o			:	%.c
-	$(COMPILE) -o $@ -c $<
-	
-clean		:
-	rm -f $(OBJ)
+$(NAME):	$(OBJS)
+	@echo "$(CYAN)[ ℹ ] Creating $(BOLD)$(NAME)...$(RESET)"
+	@ar rcs $@ $^
+	@echo "$(GREEN)[ ✓ ]$(BOLD) $(NAME) $(GREEN)created successfully.$(RESET)"
 
-fclean		:	clean
-	rm -f $(NAME)
+$(DIR_OBJ)%.o:	%.c
+	@mkdir -p $(dir $@)
+	@echo "$(YELLOW)[ ℹ ] Compiling $(BOLD)$< ...$(RESET)"
+	@$(COMPILE) -o $@ -c $<
 
-re			:	fclean all
+-include $(DEPS)
 
-.PHONY		:	all clean fclean re
+clean:
+	@$(RM) $(DIR_OBJ)
+
+fclean:	clean
+	@echo "$(RED)[🧹 ] Removing $(BOLD)$(NAME)...$(RESET)"
+	@$(RM) $(NAME)
+
+re:	fclean all
+
+.PHONY:	all clean fclean re

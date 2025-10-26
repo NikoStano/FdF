@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:34:59 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/09/03 16:10:43 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/26 17:08:57 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static void	draw_right_neighbor(t_app *a, int x, int y)
 	z1 = a->map.zbuf[y][x];
 	z2 = a->map.zbuf[y][x + 1];
 	p = v3_of(x, y, z1);
-	iso_project(p, &a->view, &s);
+	project(p, &a->view, &s);
 	p = v3_of(x + 1, y, z2);
-	iso_project(p, &a->view, &t);
-	draw_line(&a->fb, s, t, base_color(z1));
+	project(p, &a->view, &t);
+	draw_line(&a->fb, s, t, get_color(a, x, y, z1));
 }
 
 static void	draw_bottom_neighbor(t_app *a, int x, int y)
@@ -50,10 +50,10 @@ static void	draw_bottom_neighbor(t_app *a, int x, int y)
 	z1 = a->map.zbuf[y][x];
 	z2 = a->map.zbuf[y + 1][x];
 	p = v3_of(x, y, z1);
-	iso_project(p, &a->view, &s);
+	project(p, &a->view, &s);
 	p = v3_of(x, y + 1, z2);
-	iso_project(p, &a->view, &t);
-	draw_line(&a->fb, s, t, base_color(z1));
+	project(p, &a->view, &t);
+	draw_line(&a->fb, s, t, get_color(a, x, y, z1));
 }
 
 void	render(t_app *a)
@@ -77,4 +77,5 @@ void	render(t_app *a)
 		y++;
 	}
 	mlx_put_image_to_window(a->mlx, a->win, a->fb.img, 0, 0);
+	draw_hud(a);
 }
