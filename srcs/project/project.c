@@ -6,18 +6,19 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:35:03 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/10/26 16:18:58 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/27 07:33:54 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-static void	clamp_toint(long n)
+static long	clamp_toint(long n)
 {
-	if (n > (double)INT_MAX)
-		n = (double)INT_MAX;
-	if (n < (double)INT_MIN)
-		n = (double)INT_MIN;
+	if (n > (long)INT_MAX)
+		return ((long)INT_MIN);
+	if (n < (long)INT_MIN)
+		return ((long)INT_MIN);
+	return (n);
 }
 
 static long	init_proj(t_v3 p, t_view *v, t_proj *pj)
@@ -44,9 +45,15 @@ void	iso_project(t_v3 p, t_view *v, t_v2 *out)
 
 	v2 = init_proj(p, v, &pj);
 	u = (pj.xr - pj.yr) * pj.sc;
-	clamp_toint(u);
+	if (clamp_toint(u))
+		u = clamp_toint(u);
+	else
+		u = (long)(u);
 	y = v2 - (double)p.z * v->z_scale;
-	clamp_toint(y);
+	if (clamp_toint(y))
+		y = clamp_toint(y);
+	else
+		y = (long)(y);
 	out->x = (int)(u + v->off_x);
 	out->y = (int)(y + v->off_y);
 }

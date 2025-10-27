@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_3.c                                          :+:      :+:    :+:   */
+/*   utils_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/26 16:50:00 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/10/26 17:12:48 by nistanoj         ###   ########.fr       */
+/*   Created: 2025/10/27 08:30:00 by nistanoj          #+#    #+#             */
+/*   Updated: 2025/10/27 08:13:47 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,4 @@ int	get_color(t_app *a, int x, int y, int z)
 	if (ratio > 1.0f)
 		ratio = 1.0f;
 	return (interpolate_color(COLOR_LOW, COLOR_HIGH, ratio));
-}
-
-int	auto_rotate_loop(t_app *a)
-{
-	if (a->view.auto_rotate)
-	{
-		view_rotate_y(&a->view, 0.01);
-		render(a);
-	}
-	return (0);
 }

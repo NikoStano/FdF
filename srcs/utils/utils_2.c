@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:34:45 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/08/21 20:27:33 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/27 08:18:20 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,14 @@ int	base_color(int z)
 	if (z < 0)
 		return (BLUE);
 	return (BROWN);
+}
+
+void	print_projection(int proj)
+{
+	if (proj == PROJ_ISO)
+		ft_printf("Projection: Isométrique\n");
+	else if (proj == PROJ_PARALLEL)
+		ft_printf("Projection: Parallèle\n");
+	else
+		ft_printf("Projection: Conique\n");
 }

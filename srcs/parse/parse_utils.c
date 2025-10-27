@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 20:24:08 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/09/03 16:03:41 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/27 08:27:23 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,55 @@ int	parse_line_into(int *dst_z, int *dst_c, char *line, int cols)
 		return (1);
 	}
 	i = 0;
-	while (i <= cols && sp[i])
+	while (i < cols && sp[i])
 	{
 		if (parse_token(sp[i], &dst_z[i], &dst_c[i]))
 			return (ft_split_free(sp), 1);
 		i++;
 	}
 	ft_split_free(sp);
+	return (0);
+}
+
+void	free_zbuf_rows(int **zbuf, int y)
+{
+	while (y-- > 0)
+	{
+		free(zbuf[y]);
+		zbuf[y] = NULL;
+	}
+	free(zbuf);
+}
+
+void	init_cbuf_row(int *row, int cols)
+{
+	int	x;
+
+	x = 0;
+	while (x < cols)
+	{
+		row[x] = -1;
+		x++;
+	}
+}
+
+int	count_rows_from_fd(int fd, t_map *m)
+{
+	char	*ln;
+	int		r;
+
+	ln = NULL;
+	r = get_next_line(fd, &ln);
+	while (r > 0)
+	{
+		m->rows++;
+		free(ln);
+		ln = NULL;
+		r = get_next_line(fd, &ln);
+		if (r <= 0)
+			break ;
+	}
+	if (ln)
+		free(ln);
 	return (0);
 }

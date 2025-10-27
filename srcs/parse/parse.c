@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:35:19 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/09/01 15:49:02 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/27 08:31:13 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,15 @@ static int	first_pass(int fd, t_map *m)
 	ln = NULL;
 	r = get_next_line(fd, &ln);
 	if (r <= 0)
-		return (1);
-	m->cols = count_cols(ln);
-	while (r > 0)
 	{
-		m->rows++;
-		free(ln);
-		ln = NULL;
-		r = get_next_line(fd, &ln);
-		if (r <= 0)
-			break ;
+		if (ln)
+			free(ln);
+		return (1);
 	}
-	if (ln)
-		free(ln);
-	return (0);
+	m->cols = count_cols(ln);
+	m->rows = 1;
+	free(ln);
+	return (count_rows_from_fd(fd, m));
 }
 
 static int	alloc_zbuf(t_map *m)
@@ -51,12 +46,7 @@ static int	alloc_zbuf(t_map *m)
 		m->zbuf[y] = (int *)malloc(sizeof(int) * m->cols);
 		if (!m->zbuf[y])
 		{
-			while (y-- > 0)
-			{
-				free(m->zbuf[y]);
-				m->zbuf[y] = NULL;
-			}
-			free(m->zbuf);
+			free_zbuf_rows(m->zbuf, y);
 			m->zbuf = NULL;
 			return (1);
 		}
@@ -68,7 +58,6 @@ static int	alloc_zbuf(t_map *m)
 static int	alloc_cbuf(t_map *m)
 {
 	int	y;
-	int	x;
 
 	m->cbuf = (int **)malloc(sizeof(int *) * m->rows);
 	if (!m->cbuf)
@@ -83,12 +72,7 @@ static int	alloc_cbuf(t_map *m)
 			m->cbuf = NULL;
 			return (1);
 		}
-		x = 0;
-		while (x < m->cols)
-		{
-			m->cbuf[y][x] = -1;
-			x++;
-		}
+		init_cbuf_row(m->cbuf[y], m->cols);
 		y++;
 	}
 	return (0);
@@ -125,12 +109,11 @@ int	map_load(t_map *m, const char *path)
 		return (1);
 	if (first_pass(fd, m))
 		return (close(fd), 1);
-	if (alloc_zbuf(m) || alloc_cbuf(m))
+	lseek(fd, 0, SEEK_SET);
+	if (alloc_zbuf(m))
+		return (close(fd), 1);
+	if (alloc_cbuf(m))
 		return (close(fd), map_free(m), 1);
-	close(fd);
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (map_free(m), 1);
 	if (fill_row(fd, m))
 		return (close(fd), map_free(m), 1);
 	close(fd);

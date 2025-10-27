@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:36:42 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/10/27 05:01:32 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/27 08:28:09 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,25 @@ typedef struct s_rot
 	double	sz;
 }			t_rot;
 
+typedef struct s_keys
+{
+	int	left;
+	int	right;
+	int	up;
+	int	down;
+	int	rot_x_plus;
+	int	rot_x_minus;
+	int	rot_y_plus;
+	int	rot_y_minus;
+	int	rot_z_plus;
+	int	rot_z_minus;
+	int	zoom_in;
+	int	zoom_out;
+	int	z_plus;
+	int	z_minus;
+	int	frame_count;
+}			t_keys;
+
 typedef struct s_app
 {
 	void	*mlx;
@@ -129,6 +148,7 @@ typedef struct s_app
 	t_img	fb;
 	t_map	map;
 	t_view	view;
+	t_keys	keys;
 }			t_app;
 
 /* DRAW */
@@ -150,6 +170,9 @@ int		map_load(t_map *m, const char *path);
 
 /* parse_util.c */
 int		parse_line_into(int *dst_z, int *dst_c, char *line, int cols);
+void	free_zbuf_rows(int **zbuf, int y);
+void	init_cbuf_row(int *row, int cols);
+int		count_rows_from_fd(int fd, t_map *m);
 
 /* PROJECT */
 /* project.c */
@@ -180,14 +203,19 @@ int		count_cols(const char *s);
 void	free_stuff(int **stuff, int rows);
 void	map_free(t_map *m);
 int		base_color(int z);
+void	print_projection(int proj);
 
 /* VIEW */
 /* hooks */
 int		on_key(int key, t_app *a);
+int		on_key_release(int key, t_app *a);
 int		on_mouse(int btn, int x, int y, t_app *a);
 int		on_mouse_release(int btn, int x, int y, t_app *a);
 int		on_motion(int x, int y, t_app *a);
 int		on_destroy(t_app *a);
+int		handle_rotation(int key, t_app *a);
+int		handle_rotation_part1(int key, t_app *a);
+int		handle_rotation_part2(int key, t_app *a);
 
 /* view.c */
 void	view_reset(t_view *v);
@@ -196,6 +224,10 @@ void	view_rotate_z(t_view *v, double delta);
 void	view_rotate_x(t_view *v, double delta);
 void	view_rotate_y(t_view *v, double delta);
 void	draw_hud(t_app *a);
+void	draw_keys_status(t_app *a);
+void	draw_movement_keys(t_app *a, int x, int y);
+void	draw_rotation_keys(t_app *a, int x, int y);
+void	draw_zoom_keys(t_app *a, int x, int y);
 int		interpolate_color(int c1, int c2, float ratio);
 int		get_color(t_app *a, int x, int y, int z);
 int		auto_rotate_loop(t_app *a);

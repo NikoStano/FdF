@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:35:16 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/10/26 17:07:08 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/27 08:06:39 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,25 @@ static void	init_view_defaults(t_view *v)
 	v->color_mode = COLOR_AUTO;
 }
 
+static void	init_keys(t_keys *k)
+{
+	k->left = 0;
+	k->right = 0;
+	k->up = 0;
+	k->down = 0;
+	k->rot_x_plus = 0;
+	k->rot_x_minus = 0;
+	k->rot_y_plus = 0;
+	k->rot_y_minus = 0;
+	k->rot_z_plus = 0;
+	k->rot_z_minus = 0;
+	k->zoom_in = 0;
+	k->zoom_out = 0;
+	k->z_plus = 0;
+	k->z_minus = 0;
+	k->frame_count = 0;
+}
+
 int	win_init(t_app *a, const char *path)
 {
 	int	err;
@@ -38,6 +57,7 @@ int	win_init(t_app *a, const char *path)
 	if (map_load(&a->map, path))
 		return (1);
 	init_view_defaults(&a->view);
+	init_keys(&a->keys);
 	a->view.piv_x = (a->map.cols - 1) / 2.0;
 	a->view.piv_y = (a->map.rows - 1) / 2.0;
 	a->mlx = mlx_init();
@@ -73,7 +93,8 @@ void	win_destroy(t_app *a)
 int	win_run(t_app *a)
 {
 	mlx_hook(a->win, 17, 0, on_destroy, a);
-	mlx_key_hook(a->win, on_key, a);
+	mlx_hook(a->win, 2, 1L << 0, on_key, a);
+	mlx_hook(a->win, 3, 1L << 1, on_key_release, a);
 	mlx_mouse_hook(a->win, on_mouse, a);
 	mlx_hook(a->win, 5, 1L << 3, on_mouse_release, a);
 	mlx_hook(a->win, 6, 1L << 6, on_motion, a);

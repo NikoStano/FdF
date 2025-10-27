@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/10/27 06:49:51 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/10/27 08:16:08 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS_DIR	=	srcs/
 CORE_DIR	=	core/
 PARSE_DIR	=	parse/
 DRAW_DIR	=	draw/
+HOOKS_DIR	=	hooks/
 PROJECT_DIR	=	project/
 VIEW_DIR	=	view/
 UTILS_DIR	=	utils/
@@ -45,6 +46,10 @@ CORE_SRC	=	main.c \
 DRAW_SRC	=	image.c \
 				line.c \
 				render.c
+HOOKS_SRC	=	hooks.c \
+				hooks_mouse.c \
+				hooks_release.c \
+				hooks_rotation.c
 PROJECT_SRC	=	project.c \
 				project2.c \
 				project3.c \
@@ -53,14 +58,16 @@ PARSE_SRC	=	parse.c \
 				parse_utils.c
 UTILS_SRC	=	utils_1.c \
 				utils_2.c \
-				utils_3.c
+				utils_color.c \
+				utils_loop.c
 VIEW_SRC	=	view.c \
-				hooks.c \
-				hooks2.c \
-				hud.c
+				hud.c \
+				hud_keys.c \
+				hud_status.c
 
 SRCS		=	$(addprefix $(CORE_DIR), $(CORE_SRC)) \
 				$(addprefix $(DRAW_DIR), $(DRAW_SRC)) \
+				$(addprefix $(HOOKS_DIR), $(HOOKS_SRC)) \
 				$(addprefix $(PROJECT_DIR), $(PROJECT_SRC)) \
 				$(addprefix $(PARSE_DIR), $(PARSE_SRC)) \
 				$(addprefix $(UTILS_DIR), $(UTILS_SRC)) \
@@ -102,6 +109,16 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 
 -include $(DEPS)
 
+mlx:
+	@if [ -d "$(MLX)" ]; then \
+		echo "$(GREEN)[ ✓ ] MiniLibX already exists.$(RESET)"; \
+	else \
+		echo "$(CYAN)[ ℹ ] Downloading mlx from 42paris REPO...$(RESET)"; \
+		git clone https://github.com/42paris/minilibx-linux.git; \
+		cd $(MLX) && bash configure | tail -3 && cd ..; \
+		make -s re; \
+	fi
+
 norminette:
 	@echo "$(CYAN)[ ℹ ] Running norminette $(BOLD)BY NISTANOJ...$(RESET)"
 	@if command -v norminette > /dev/null 2>&1; then \
@@ -137,9 +154,7 @@ test:
 	@LIBX="/home/niko/42/Cursus-42/fdf/minilibx-linux/" ; \
 	if [ ! -d "$$LIBX" ]; then \
 		echo "$(YELLOW)[ ! ] MiniLibX not found at '$$LIBX'.$(RESET)"; \
-		git clone https://github.com/42paris/minilibx-linux.git $$LIBX; \
-		echo "$(GREEN)[ ✓ ] MiniLibX cloned successfully.$(RESET)"; \
-		cd $$LIBX && bash configure; \
+		make -s mlx; \
 	else \
 		echo "$(GREEN)[ ✓ ] MiniLibX found at '$$LIBX'.$(RESET)"; \
 	fi
@@ -207,11 +222,16 @@ fclean:			clean
 	@echo "$(RED)[🧹 ] Removing $(BOLD)$(NAME)...$(RESET)"
 	@$(RM) $(NAME)
 
+mlx_clean:
+	@echo "$(RED)[🧹 ] Removing $(BOLD)$(MLX)...$(RESET)"
+	@${RM} $(MLX)
+	@echo "$(YELLOW)[ ! ] Run 'make mlx' to build again ...$(RESET)"
+
 re:				fclean all
 
 bonus:			all
 
-.PHONY:			all norminette test clean fclean re bonus
+.PHONY:			all mlx norminette test clean fclean mlx_clean re bonus
 
 # Règle silencieuse pour les arguments passés après une règle make
 ifeq (norminette,$(firstword $(MAKECMDGOALS)))

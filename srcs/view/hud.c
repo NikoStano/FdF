@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 16:55:00 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/10/26 17:09:38 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/27 07:47:46 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	draw_hud(t_app *a)
 	draw_color_mode(a, 80);
 	if (a->view.auto_rotate)
 		mlx_string_put(a->mlx, a->win, 10, 100, 0x00FF00, "[AUTO-ROTATE ON]");
+	draw_keys_status(a);
 }
