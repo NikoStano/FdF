@@ -28,6 +28,9 @@ Fichier .fdf :          Rendu 3D :
 ## 🚀 Utilisation
 
 ```bash
+gcl https://github.com/42paris/minilibx-linux.git
+cd minilibx-linux && chmod +x configure && ./configure
+cd ..
 make
 ./fdf maps/42.fdf
 ```

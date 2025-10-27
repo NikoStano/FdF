@@ -6,7 +6,7 @@
 #    By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/31 07:51:02 by nistanoj          #+#    #+#              #
-#    Updated: 2025/10/26 17:46:50 by nistanoj         ###   ########.fr        #
+#    Updated: 2025/10/27 06:49:51 by nistanoj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,22 +134,63 @@ norminette:
 
 test:
 	@echo "$(CYAN)[ ℹ ] Running tests...$(RESET)"
-	@cd /home/niko/42/Cursus-42/fdf && \
-	echo "$(CYAN)=== CHECK-UP FINAL ===$(RESET)" && \
-	echo "" && echo "$(CYAN)[ 1 ] Compilation:$(RESET)" && \
-	make -s re 2>&1 | tail -3 && \
-	echo "" && echo "$(CYAN)[ 2 ] Norminette (fichiers critiques):$(RESET)" && \
-	make -s norminette srcs includes libft 2>&1 | tail -1 && \
-	echo "" && echo "$(CYAN)[ 3 ] Test fonctionnel:$(RESET)" && \
-	timeout 2 ./fdf maps/42.fdf 2>&1 || \
-	echo "$(GREEN)[ ✓ ] Programme lancé OK (timeout after 2s)$(RESET)" && \
-	echo "" && echo "$(CYAN)[ 4 ] Valgrind test:$(RESET)" && \
-	timeout 2 valgrind ./fdf maps/julia.fdf 2>&1 || \
-	echo "$(GREEN)[ ✓ ] Valgrind test lancé OK (timeout after 2s)$(RESET)" && \
-	echo "" && echo "$(CYAN)[ 5 ] Parsing couleurs hexa:$(RESET)" && \
-	timeout 2 ./fdf maps/julia.fdf 2>&1 || \
-	echo "$(GREEN)[ ✓ ] Julia.fdf lancé OK (timeout after 2s)$(RESET)" && \
-	echo "" && echo "$(CYAN)=== FIN DU CHECK-UP ===$(RESET)"
+	@LIBX="/home/niko/42/Cursus-42/fdf/minilibx-linux/" ; \
+	if [ ! -d "$$LIBX" ]; then \
+		echo "$(YELLOW)[ ! ] MiniLibX not found at '$$LIBX'.$(RESET)"; \
+		git clone https://github.com/42paris/minilibx-linux.git $$LIBX; \
+		echo "$(GREEN)[ ✓ ] MiniLibX cloned successfully.$(RESET)"; \
+		cd $$LIBX && bash configure; \
+	else \
+		echo "$(GREEN)[ ✓ ] MiniLibX found at '$$LIBX'.$(RESET)"; \
+	fi
+	@echo ""
+	@echo "$(CYAN)=== CHECK-UP FINAL ===$(RESET)"
+	@echo ""
+	@echo "$(CYAN)[ 1 ] Compilation:$(RESET)"
+	@$(MAKE) -s re 2>&1 | tail -3
+	@echo ""
+	@echo "$(CYAN)[ 2 ] Norminette (fichiers critiques):$(RESET)"
+	@$(MAKE) -s norminette srcs includes libft 2>&1 | tail -1
+	@echo ""
+	@echo "$(CYAN)[ 3 ] Test fonctionnel:$(RESET)"
+	@if [ -d "maps/" ]; then \
+		TOTAL=$$(ls maps/*.fdf 2>/dev/null | wc -l); \
+		COUNT=0; \
+		ESC_COUNT=0; \
+		echo "$(CYAN)[ ℹ ] Testing $$TOTAL maps...$(RESET)"; \
+		for file in maps/*.fdf; do \
+			if [ -f "$$file" ]; then \
+				COUNT=$$((COUNT + 1)); \
+				echo "$(YELLOW)[ ℹ ] $$file... [$$COUNT/$$TOTAL]$(RESET)"; \
+				timeout 2 ./fdf $$file > /dev/null 2>&1; \
+				EXIT_CODE=$$?; \
+				if [ $$EXIT_CODE -eq 0 ]; then \
+					echo "$(GREEN)[ ✓ ] OK Exit code : $$EXIT_CODE $(RESET)"; \
+					ESC_COUNT=$$((ESC_COUNT + 1)); \
+				elif [ $$EXIT_CODE -eq 124 ]; then \
+					echo "$(GREEN)[ ✓ ] OK Exit code : $$EXIT_CODE (timeout after 2s)$(RESET)"; \
+				else \
+					echo "$(RED)[ ✗ ] KO Exit code : $$EXIT_CODE Error$(RESET)"; \
+					COUNT=$$((COUNT - 1)); \
+				fi; \
+			fi; \
+		done; \
+		echo ""; \
+		if [ $$COUNT -eq $$TOTAL ]; then \
+			if [ $$ESC_COUNT -gt 0 ]; then \
+				echo "$(YELLOW)[ ! ] Escaped tests: $(BOLD)[$$ESC_COUNT/$$TOTAL]$(RESET)"; \
+				echo ""; \
+			fi; \
+			echo "$(GREEN)[ ✓ ] All tests completed: $(BOLD)[$$COUNT/$$TOTAL]$(RESET)"; \
+		else \
+			echo "$(YELLOW)[ ! ] Escaped tests: $(BOLD)[$$ESC_COUNT/$$TOTAL]$(RESET)"; \
+			echo "$(RED)[ ✗ ] Tests completed: $(BOLD)[$$COUNT/$$TOTAL]$(RESET)"; \
+		fi; \
+	else \
+		echo "$(RED)[ ✗ ] Directory maps/ not found!$(RESET)"; \
+	fi
+	@echo ""
+	@echo "$(CYAN)=== FIN DU CHECK-UP ===$(RESET)"
 
 # Règle catch-all pour les arguments de norminette
 %:
