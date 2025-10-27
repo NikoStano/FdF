@@ -6,7 +6,7 @@
 /*   By: nistanoj <nistanoj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:34:59 by nistanoj          #+#    #+#             */
-/*   Updated: 2025/10/27 07:31:49 by nistanoj         ###   ########.fr       */
+/*   Updated: 2025/10/27 09:38:53 by nistanoj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,6 @@ static void	draw_bottom_neighbor(t_app *a, int x, int y)
 	project(p, &a->view, &t);
 	draw_line(&a->fb, s, t, get_color(a, x, y, z1));
 }
-
-// void	smart_render(t_app *a)
-// {
-// 	if (!a->cache.dirty)
-// 		return ;
-// 	project
-// 	draw_all_lines(a);
-// 	a->cache.dirty = 0;
-// }
 
 void	render(t_app *a)
 {

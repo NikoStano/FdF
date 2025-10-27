@@ -1,0 +1,488 @@
+==618057== Memcheck, a memory error detector
+==618057== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==618057== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==618057== Command: ./fdf maps/42.fdf
+==618057== Parent PID: 618056
+==618057== 
+==618057== 
+==618057== Process terminating with default action of signal 15 (SIGTERM)
+==618057==    at 0x4BB9C05: poll (poll.c:29)
+==618057==    by 0x4CD87E1: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CD8EB0: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CD9EA5: xcb_wait_for_reply64 (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x48C031B: _XReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48C077E: XSync (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x1108F7: mlx_loop (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AE92: win_run (init.c:103)
+==618057==    by 0x10A985: main (main.c:28)
+==618057== 
+==618057== HEAP SUMMARY:
+==618057==     in use at exit: 83,200 bytes in 88 blocks
+==618057==   total heap usage: 94,062 allocs, 93,974 frees, 2,343,124 bytes allocated
+==618057== 
+==618057== 3 bytes in 1 blocks are still reachable in loss record 1 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4B4958E: strdup (strdup.c:42)
+==618057==    by 0x48A9B45: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 8 bytes in 1 blocks are still reachable in loss record 2 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4B4958E: strdup (strdup.c:42)
+==618057==    by 0x48A69AE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x486B820: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 8 bytes in 1 blocks are still reachable in loss record 3 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4869B34: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B9DF: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 10 bytes in 1 blocks are still reachable in loss record 4 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4B4958E: strdup (strdup.c:42)
+==618057==    by 0x48A69AE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x4910213: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48AA6A8: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 16 bytes in 1 blocks are still reachable in loss record 5 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4CDB2EE: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDB8A3: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x48B9EE9: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A9B68: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 22 bytes in 1 blocks are still reachable in loss record 6 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48AA03E: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 23 bytes in 1 blocks are still reachable in loss record 7 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4CF7997: XauFileName (in /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0)
+==618057==    by 0x4CF7D9C: XauGetBestAuthByAddr (in /usr/lib/x86_64-linux-gnu/libXau.so.6.0.0)
+==618057==    by 0x4CDBAB1: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x48B9EE9: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A9B68: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 24 bytes in 1 blocks are still reachable in loss record 8 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x486B041: XextCreateExtension (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B4CC: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B9C8: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 24 bytes in 1 blocks are still reachable in loss record 9 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4B4958E: strdup (strdup.c:42)
+==618057==    by 0x48A69AE: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x486B820: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B50A: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B9C8: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 24 bytes in 1 blocks are still reachable in loss record 10 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x486B9F5: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 29 bytes in 1 blocks are still reachable in loss record 11 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A30CD: _XUpdateAtomCache (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A5929: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110612: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 32 bytes in 1 blocks are still reachable in loss record 12 of 51
+==618057==    at 0x48487A9: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4CDF15E: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDF237: xcb_get_extension_data (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDF2EE: xcb_prefetch_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDF364: xcb_get_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x48AA52B: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 32 bytes in 1 blocks are still reachable in loss record 13 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4CD81B7: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CD8A08: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CD8EB0: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CD9E44: xcb_wait_for_reply (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDF292: xcb_get_extension_data (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDF2EE: xcb_prefetch_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDF364: xcb_get_maximum_request_length (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x48AA52B: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 32 bytes in 1 blocks are still reachable in loss record 14 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x486B7FF: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 32 bytes in 1 blocks are still reachable in loss record 15 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x486B7FF: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B50A: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B9C8: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 33 bytes in 1 blocks are still reachable in loss record 16 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A30CD: _XUpdateAtomCache (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A5929: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x1105FB: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 40 bytes in 1 blocks are still reachable in loss record 17 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48BA1F1: _XPollfdCacheInit (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A9E71: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 48 bytes in 1 blocks are still reachable in loss record 18 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48B9E71: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A9B68: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 48 bytes in 1 blocks are still reachable in loss record 19 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48B9E87: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A9B68: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 48 bytes in 2 blocks are still reachable in loss record 20 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48B7A65: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48C02C6: _XReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48C077E: XSync (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x1108F7: mlx_loop (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AE92: win_run (init.c:103)
+==618057==    by 0x10A985: main (main.c:28)
+==618057== 
+==618057== 72 bytes in 1 blocks are still reachable in loss record 21 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A9F20: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 88 bytes in 1 blocks are still reachable in loss record 22 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x10CEB4: alloc_zbuf (parse.c:40)
+==618057==    by 0x10D1F4: map_load (parse.c:113)
+==618057==    by 0x10AB77: win_init (init.c:57)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 88 bytes in 1 blocks are still reachable in loss record 23 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x10CF94: alloc_cbuf (parse.c:62)
+==618057==    by 0x10D215: map_load (parse.c:115)
+==618057==    by 0x10AB77: win_init (init.c:57)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 88 bytes in 1 blocks are still reachable in loss record 24 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x110CEB: mlx_int_new_xshm_image (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x111012: mlx_new_image (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AEDE: img_create (image.c:19)
+==618057==    by 0x10AC7C: win_init (init.c:69)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 112 bytes in 1 blocks are still reachable in loss record 25 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48B9D72: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A9B68: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 112 bytes in 1 blocks are still reachable in loss record 26 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48AA200: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 128 bytes in 1 blocks are still reachable in loss record 27 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48AA12E: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 128 bytes in 1 blocks are still reachable in loss record 28 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A699E: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x4910213: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48AA6A8: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 128 bytes in 1 blocks are still reachable in loss record 29 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A699E: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x486B820: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 128 bytes in 1 blocks are still reachable in loss record 30 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A699E: XInitExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x486B820: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B50A: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B9C8: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 136 bytes in 1 blocks are still reachable in loss record 31 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x11054F: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 136 bytes in 1 blocks are still reachable in loss record 32 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x486A0C3: XShmCreateImage (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110D16: mlx_int_new_xshm_image (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x111012: mlx_new_image (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AEDE: img_create (image.c:19)
+==618057==    by 0x10AC7C: win_init (init.c:69)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 152 bytes in 1 blocks are still reachable in loss record 33 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x491040E: XkbUseExtension (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48AA6A8: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 160 bytes in 1 blocks are still reachable in loss record 34 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48989EF: XCreateGC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48AA5A4: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 160 bytes in 1 blocks are still reachable in loss record 35 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48989EF: XCreateGC (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x11079E: mlx_new_window (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC42: win_init (init.c:66)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 168 bytes in 1 blocks are still reachable in loss record 36 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48AA0B2: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 208 bytes in 1 blocks are still reachable in loss record 37 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4869AE9: ??? (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x486B9DF: XextAddDisplay (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x48709E2: XShmQueryVersion (in /usr/lib/x86_64-linux-gnu/libXext.so.6.4.0)
+==618057==    by 0x110393: mlx_int_deal_shm (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x110621: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 208 bytes in 1 blocks are still reachable in loss record 38 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48BBFAE: _XEnq (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BEBB6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BFEC0: _XReadEvents (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48C0205: XWindowEvent (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110AC5: mlx_int_wait_first_expose (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x1107DE: mlx_new_window (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC42: win_init (init.c:66)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 208 bytes in 1 blocks are still reachable in loss record 39 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48BBFAE: _XEnq (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BEBB6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BEC69: _XEventsQueued (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x489987D: XFlush (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110C67: mlx_string_put (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10E4EE: draw_proj_info (hud.c:25)
+==618057==    by 0x10E86A: draw_hud (hud.c:73)
+==618057==    by 0x10B588: render (render.c:80)
+==618057==    by 0x10AE83: win_run (init.c:102)
+==618057==    by 0x10A985: main (main.c:28)
+==618057== 
+==618057== 512 bytes in 1 blocks are still reachable in loss record 40 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A546A: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A584E: XInternAtom (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x1105FB: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 624 bytes in 3 blocks are still reachable in loss record 41 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48BBFAE: _XEnq (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BEBB6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48C040C: _XReply (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48C077E: XSync (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110DE0: mlx_int_new_xshm_image (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x111012: mlx_new_image (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AEDE: img_create (image.c:19)
+==618057==    by 0x10AC7C: win_init (init.c:69)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 832 bytes in 4 blocks are still reachable in loss record 42 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48BBFAE: _XEnq (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BEBB6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BEC69: _XEventsQueued (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x489987D: XFlush (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x10B57C: render (render.c:79)
+==618057==    by 0x10AE83: win_run (init.c:102)
+==618057==    by 0x10A985: main (main.c:28)
+==618057== 
+==618057== 836 bytes in 11 blocks are still reachable in loss record 43 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x10CF0A: alloc_zbuf (parse.c:46)
+==618057==    by 0x10D1F4: map_load (parse.c:113)
+==618057==    by 0x10AB77: win_init (init.c:57)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 836 bytes in 11 blocks are still reachable in loss record 44 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x10CFED: alloc_cbuf (parse.c:68)
+==618057==    by 0x10D215: map_load (parse.c:115)
+==618057==    by 0x10AB77: win_init (init.c:57)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 936 bytes in 1 blocks are still reachable in loss record 45 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x110700: mlx_new_window (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC42: win_init (init.c:66)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 2,288 bytes in 11 blocks are still reachable in loss record 46 of 51
+==618057==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48BBFAE: _XEnq (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BEBB6: ??? (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48BFF01: _XReadEvents (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48C0205: XWindowEvent (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110AC5: mlx_int_wait_first_expose (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x1107DE: mlx_new_window (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC42: win_init (init.c:66)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 4,704 bytes in 1 blocks are still reachable in loss record 47 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A9B31: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 9,432 bytes in 1 blocks are still reachable in loss record 48 of 51
+==618057==    at 0x484DCD3: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4CDB4FB: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDB8A3: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x48B9EE9: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A9B68: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 16,384 bytes in 1 blocks are still reachable in loss record 49 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48A9EBE: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 21,168 bytes in 1 blocks are still reachable in loss record 50 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x4CDB204: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x4CDB8A3: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==618057==    by 0x48B9EE9: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x48A9B68: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== 21,504 bytes in 2 blocks are still reachable in loss record 51 of 51
+==618057==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==618057==    by 0x48AA290: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.4.0)
+==618057==    by 0x110567: mlx_init (in /home/niko/42/Cursus-42/FdF/fdf)
+==618057==    by 0x10AC05: win_init (init.c:63)
+==618057==    by 0x10A946: main (main.c:23)
+==618057== 
+==618057== LEAK SUMMARY:
+==618057==    definitely lost: 0 bytes in 0 blocks
+==618057==    indirectly lost: 0 bytes in 0 blocks
+==618057==      possibly lost: 0 bytes in 0 blocks
+==618057==    still reachable: 83,200 bytes in 88 blocks
+==618057==         suppressed: 0 bytes in 0 blocks
+==618057== 
+==618057== For lists of detected and suppressed errors, rerun with: -s
+==618057== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 1)
