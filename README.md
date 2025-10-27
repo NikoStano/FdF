@@ -31,26 +31,40 @@ Fichier .fdf :          Rendu 3D :
 gcl https://github.com/NikoStano/FdF.git
 cd FdF
 make mlx
+./fdf maps/42.fdf
 ```
 
-Le programme affiche la carte en 3D avec un HUD montrant les contrôles et paramètres.
+Le programme affiche la carte en 3D avec un HUD montrant les contrôles et paramètres en temps réel.
 
 ---
 
 ## 🎮 Contrôles
 
+### Déplacement et Vue
 | Touche | Action |
 |--------|--------|
 | **ESC** | Quitter |
-| **↑ ↓ ← →** | Déplacer la vue |
+| **↑ ↓ ← →** ou **W A S D** | Déplacer la vue |
 | **+ / -** ou **Molette** | Zoom / Dézoom |
-| **P** | Changer de projection (Iso / Parallèle / Conique) |
-| **W A S D** | Rotation X et Y |
-| **Q / E** | Rotation Z |
 | **Shift / Ctrl** | Modifier l'échelle Z (relief) |
-| **R** | Activer/Désactiver rotation automatique |
-| **C** | Changer de mode couleur (Auto / Custom) |
-| **Espace** | Reset vue
+
+### Rotation
+| Touche | Action |
+|--------|--------|
+| **I / K** | Rotation X (haut / bas) |
+| **J / L** | Rotation Y (gauche / droite) |
+| **Q / E** | Rotation Z (sens horaire / anti-horaire) |
+| **Espace** | Activer/Désactiver rotation automatique |
+
+### Options
+| Touche | Action |
+|--------|--------|
+| **P** | Changer de projection (Isométrique / Parallèle / Conique) |
+| **C** | Changer de mode couleur (Auto / Gradient) |
+| **R** | Reset vue (retour à la position initiale) |
+
+> 💡 **Astuce :** Les touches peuvent être maintenues pour une action continue !  
+> Le HUD affiche en temps réel les touches pressées en **vert**.
 
 ---
 
@@ -106,7 +120,16 @@ Le projet gère :
 - ✅ Les couleurs hexadécimales (parsing corrigé pour `0x...`)
 - ✅ Les dégradés automatiques de couleurs
 - ✅ Le centrage automatique des maps
-- ✅ L'affichage fluide avec HUD
+- ✅ L'affichage fluide avec HUD interactif
+- ✅ **Nouveau** : Affichage en temps réel des touches pressées (HUD dynamique)
+- ✅ **Nouveau** : Actions continues lors du maintien des touches
+- ✅ **Nouveau** : Contrôle précis de la vitesse (throttling à 20 FPS pour les inputs)
+
+### Fonctionnalités avancées
+- **HUD dynamique** : Affiche les paramètres actuels (projection, angles, échelle) et les touches pressées en vert
+- **Rotation automatique** : Mode démo qui fait tourner la carte automatiquement
+- **3 modes de projection** : Isométrique (défaut), Parallèle, Conique
+- **2 modes de couleur** : Auto (basé sur l'altitude) ou Gradient personnalisé
 
 ---
 
